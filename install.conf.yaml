@@ -1,0 +1,29 @@
+- defaults:
+    link:
+      relink: true
+
+- clean:
+    ~/:
+    ~/.config:
+      recursive: true
+
+- link:
+    ~/.gitconfig:
+    ~/.tmux.conf:
+    ~/.Xresources:
+    ~/.xprofile:
+    ~/.config/awesome:
+      create: true
+
+    ~/.config/fish/functions:
+      path: fish/functions/*.fish
+      create: true
+      glob: true
+
+    ~/.config/fish/:
+      path: fish/*
+      create: true
+      glob: true
+
+    ~/.config/doom:
+      create: true
