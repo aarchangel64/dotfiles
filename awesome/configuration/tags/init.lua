@@ -44,18 +44,6 @@ local tags = {
         layout = awful.layout.suit.floating
     },
     {
-        type = "graphics",
-        icon = icons.graphics,
-        default_app = apps.default.graphics,
-        gap = beautiful.useless_gap
-    },
-    {
-        type = "any",
-        icon = icons.development,
-        default_app = apps.default.development,
-        gap = beautiful.useless_gap
-    },
-    {
         type = "social",
         icon = icons.social,
         default_app = "discord",
@@ -69,10 +57,8 @@ tag.connect_signal(
     function()
         awful.layout.append_default_layouts(
             {
-                awful.layout.suit.fair,
                 awful.layout.suit.tile,
-                awful.layout.suit.floating,
-                awful.layout.suit.max
+                awful.layout.suit.floating
             }
         )
     end
@@ -83,7 +69,7 @@ screen.connect_signal(
     "request::desktop_decoration",
     function(s)
         default_layout =
-            ((s.geometry.width >= s.geometry.height) and awful.layout.suit.fair) or awful.layout.suit.fair.horizontal
+            ((s.geometry.width >= s.geometry.height) and awful.layout.suit.tile) or awful.layout.suit.tile.bottom
         for i, tag in pairs(tags) do
             awful.tag.add(
                 i,
