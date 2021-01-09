@@ -12,7 +12,7 @@ require("awful.autofocus")
 -- ░▀▀█░█▀█░█▀▀░█░░░█░░
 -- ░▀▀▀░▀░▀░▀▀▀░▀▀▀░▀▀▀
 
-awful.util.shell = "fish"
+awful.util.shell = "sh"
 
 -- ░▀█▀░█░█░█▀▀░█▄█░█▀▀
 -- ░░█░░█▀█░█▀▀░█░█░█▀▀
