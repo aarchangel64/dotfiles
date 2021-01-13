@@ -1,6 +1,7 @@
 - defaults:
     link:
       relink: true
+      create: true
 
 - clean:
     ~/:
@@ -13,17 +14,14 @@
     ~/.Xresources:
     ~/.xprofile:
     ~/.config/awesome:
-      create: true
+    ~/.config/alacritty:
 
     ~/.config/fish/functions:
       path: fish/functions/*.fish
-      create: true
       glob: true
 
     ~/.config/fish/:
       path: fish/*
-      create: true
       glob: true
 
     ~/.config/doom:
-      create: true
