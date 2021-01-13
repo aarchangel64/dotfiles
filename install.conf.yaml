@@ -15,6 +15,8 @@
     ~/.xprofile:
     ~/.config/awesome:
     ~/.config/alacritty:
+    ~/.config/qmk:
+    ~/.config/doom:
 
     ~/.config/fish/functions:
       path: fish/functions/*.fish
@@ -24,4 +26,3 @@
       path: fish/*
       glob: true
 
-    ~/.config/doom:
