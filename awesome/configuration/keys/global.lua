@@ -414,7 +414,7 @@ local global_keys = awful.util.table.join(
 		{'Control', 'Shift'}, 
 		'Escape',
 		function()
-			awful.spawn(apps.default.terminal .. ' ' .. 'htop')
+			awful.spawn(apps.default.terminal .. ' ' .. 'bpytop')
 		end,
 		{description = 'open system monitor', group = 'launcher'}
 	),
