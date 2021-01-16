@@ -113,7 +113,7 @@ ruled.client.connect_signal(
             id = "terminals",
             rule_any = {
                 class = {
-                    "alacritty"
+                    "kitty"
                 }
             },
             properties = {

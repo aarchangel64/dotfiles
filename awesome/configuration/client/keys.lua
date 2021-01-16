@@ -46,7 +46,7 @@ local client_keys =
         {description = "toggle fullscreen", group = "client"}
     ),
     --
-    -- Layout-aware resizin
+    -- Layout-aware resizing
     awful.key(
         {modkey},
         "Shift",
@@ -92,8 +92,8 @@ local client_keys =
         {description = "close", group = "client"}
     ),
     awful.key(
-        {modkey, "Shift"},
-        "d",
+        {modkey},
+        "n",
         function()
             awful.client.swap.byidx(1)
         end,
@@ -101,7 +101,7 @@ local client_keys =
     ),
     awful.key(
         {modkey, "Shift"},
-        "a",
+        "N",
         function()
             awful.client.swap.byidx(-1)
         end,
@@ -159,7 +159,7 @@ local client_keys =
 
     awful.key(
         {modkey},
-        "n",
+        "m",
         function(c)
             c.minimized = true
         end,
