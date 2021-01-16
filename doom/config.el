@@ -53,5 +53,11 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+
+(add-hook! fish-mode
+  (set-company-backend! 'fish-mode '(company-shell company-shell-env company-fish-shell company-files))
+  )
+
+
 (load! "project")
 (load! "mapping")
