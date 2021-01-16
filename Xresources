@@ -1,3 +1,5 @@
 Xft.dpi: 192 
 Xcursor.theme: nier_cursors
 Xcursor.size: 48
+
+#include "$HOME/.dotfiles/xcolours/henna"

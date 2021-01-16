@@ -12,25 +12,25 @@ color1       #e74c3c
 color9       #ff6655
 
 # green
-color2       #30c965
-color10      #9cd230
+color2       #53df83
+color10      #99bb66
 
 # yellow
 color3       #ecbe7b
 color11      #f6df92
 
 # blue
-color4       #4d88ec
+color4       #56b5c2
 color12      #51afef
 
 # magenta
-color5       #c5a3ff
-color13      #ffb8d1
+color5       #ffb8d1
+color13      #ffd1e1
 
 # cyan
-color6       #1abc9c
-color14      #46d9ff
+color6       #46d9ff
+color14      #5af2ee
 
 # white
-color7       #bfbfbf
-color15      #f8f8f0
+color7       #f8f8f0
+color15      #bfbfbf
