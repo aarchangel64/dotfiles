@@ -13,6 +13,12 @@
 ;;
 ;;      Alternatively, press 'gd' (or 'C-c c d') on a module to browse its
 ;;      directory (for easy access to its source code).
+
+
+
+
+
+
 (doom! :input
        ;;chinese
        ;;japanese
@@ -39,22 +45,22 @@
        modeline    ; snazzy, Atom-inspired modeline, plus API
        ;;nav-flash         ; blink cursor line after big motions
        ;;neotree           ; a project drawer, like NERDTree for vim
-       ophints                    ; highlight the region an operation acts on
-       (popup +defaults)          ; tame sudden yet inevitable temporary windows
-       tabs                       ; a tab bar for Emacs
+       ophints               ; highlight the region an operation acts on
+       (popup +defaults)     ; tame sudden yet inevitable temporary windows
+       ;; tabs                       ; a tab bar for Emacs
        ;;treemacs          ; a project drawer, like neotree but cooler
-       unicode          ; extended unicode support for various languages
-       vc-gutter        ; vcs diff in the fringe
-       vi-tilde-fringe  ; fringe tildes to mark beyond EOB
-       window-select    ; visually switch windows
-       workspaces       ; tab emulation, persistence & separate workspaces
+       ;; unicode          ; extended unicode support for various languages
+       vc-gutter                        ; vcs diff in the fringe
+       vi-tilde-fringe                  ; fringe tildes to mark beyond EOB
+       window-select                    ; visually switch windows
+       ;; workspaces       ; tab emulation, persistence & separate workspaces
        ;;zen               ; distraction-free coding or writing
 
        :editor
        (evil +everywhere)               ; come to the dark side, we have cookies
        file-templates                   ; auto-snippets for empty files
        fold                             ; (nigh) universal code folding
-       (format)                 ; automated prettiness
+       format                           ; automated prettiness
        ;;god               ; run Emacs commands without modifier keys
        lispy          ; vim for lisp, for people who don't like vim
        multiple-cursors                 ; editing in many places at once
@@ -92,13 +98,13 @@
        (eval +overlay)       ; run code, run (also, repls)
        ;;gist              ; interacting with github gists
        lookup                   ; navigate your code and its documentation
-       ;;lsp
+       lsp
        magit                    ; a git porcelain for Emacs
        ;;make              ; run make tasks from Emacs
        ;;pass              ; password manager for nerds
        pdf                              ; pdf enhancements
        ;;prodigy           ; FIXME managing external services & code builders
-       rgb        ; creating taskrunner color
+       ;; rgb        ; creating taskrunner color
        ;;strings        ; taskrunner for all your projects
        ;;terraform         ; infrastructure as code
        ;;tmux              ; an API for interacting with tmux
@@ -110,7 +116,7 @@
 
        :lang
        ;;agda              ; types of types of types of types...
-       cc   ; C/C++/Obj-C madness
+       (cc +lsp)                        ; C/C++/Obj-C madness
        ;;clojure           ; java with a lisp
        ;;common-lisp       ; if you've seen one lisp, you've seen them all
        ;;coq               ; proofs-as-programs
