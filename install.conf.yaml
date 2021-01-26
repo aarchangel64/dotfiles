@@ -18,6 +18,8 @@
     ~/.config/kitty:
     ~/.config/qmk:
     ~/.config/doom:
+    ~/.config/pulse:
+    ~/.config/chemacs:
 
     ~/.config/fish/functions:
       path: fish/functions/*.fish
