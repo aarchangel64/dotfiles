@@ -48,8 +48,7 @@ local client_keys =
     --
     -- Layout-aware resizing
     awful.key(
-        {modkey},
-        "Shift",
+        {modkey, "Shift"},
         "h",
         function()
             resize_horizontal(0.05)
