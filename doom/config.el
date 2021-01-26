@@ -53,11 +53,30 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+(add-hook 'lua-mode-hook #'lsp!)
+
+;; (after! lsp-lua
+;;   (setq lsp-clients-lua-language-server-bin "/usr/bin/lua-language-server")
+;;   (setq lsp-clients-lua-language-server-install-dir "/usr/bin/")
+;;   )
 
 (add-hook! fish-mode
   (set-company-backend! 'fish-mode '(company-shell company-shell-env company-fish-shell company-files))
   )
 
+;; Open lookups in new window: https://github.com/hlissner/doom-emacs/issues/3397
+;; (dolist (fn '(definition references documentation))
+;;   (fset (intern (format "+lookup/%s-new-window" fn))
+;;         (lambda (identifier &optional arg)
+;;           "TODO"
+;;           (interactive (list (doom-thing-at-point-or-region)
+;;                              current-prefix-arg))
+;;           (let ((pt (point)))
+;;             (+evil-window-vsplit-a (get-buffer-window))
+;;             (switch-to-buffer-other-window (current-buffer))
+;;             (goto-char pt)
+;;             (funcall (intern (format "+lookup/%s" fn)) identifier arg)))))
 
-(load! "project")
+
+;; (load! "project")
 (load! "mapping")

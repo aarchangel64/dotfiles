@@ -19,3 +19,5 @@
 (map! :n [mouse-8] #'better-jumper-jump-backward
       :n [mouse-9] #'better-jumper-jump-forward
       )
+
+;; (map! :n "K" #'+lookup/documentation-new-window)
