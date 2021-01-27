@@ -3,7 +3,6 @@ local gears = require("gears")
 local beautiful = require("beautiful")
 local wibox = require("wibox")
 local dpi = beautiful.xresources.apply_dpi
-local lay = wibox.layout
 
 awful.titlebar.enable_tooltip = true
 awful.titlebar.fallback_name = "Client"
@@ -62,55 +61,67 @@ local create_click_events = function(c)
     return buttons
 end
 
+local function top_group(c, orientation)
+    return {
+        -- Window Control Buttons
+        {
+            awful.titlebar.widget.closebutton(c),
+            awful.titlebar.widget.maximizedbutton(c),
+            awful.titlebar.widget.minimizebutton(c),
+            spacing = spacing_size,
+            layout = wibox.layout.fixed[orientation]
+        },
+        margins = margin_size,
+        widget = wibox.container.margin
+    }
+end
+
+local function middle_group(c, orientation, pos)
+    local dir = {left = "east", right = "west", top = "north", bottom = "north"}
+    return {
+        -- Title
+        {
+            {
+                align = "center",
+                widget = awful.titlebar.widget.titlewidget(c)
+                -- layout = (vert and lay.flex.vertical) or lay.flex.horizontal
+            },
+            direction = dir[pos],
+            widget = wibox.container.rotate
+        },
+        -- Drag Events
+        buttons = create_click_events(c),
+        layout = wibox.layout.flex[orientation]
+    }
+end
+
+local function last_group(c, orientation)
+    return {
+        -- Layout Control Buttons
+        {
+            awful.titlebar.widget.ontopbutton(c),
+            awful.titlebar.widget.floatingbutton(c),
+            spacing = spacing_size,
+            layout = wibox.layout.fixed[orientation]
+        },
+        margins = margin_size,
+        widget = wibox.container.margin
+    }
+end
+
 local function create_titlebar(c, bg, pos)
     pos = pos or default_pos
-    local vert = (pos == "left" or pos == "right")
+    local orientation = ((pos == "left" or pos == "right") and "vertical") or "horizontal"
     local size = beautiful.titlebar_size
 
     awful.titlebar(c, {position = pos, bg = bg, size = size}):setup {
         -- Top/Left Section
-        {
-            -- Window Control Buttons
-            {
-                awful.titlebar.widget.closebutton(c),
-                awful.titlebar.widget.maximizedbutton(c),
-                awful.titlebar.widget.minimizebutton(c),
-                spacing = spacing_size,
-                layout = (vert and lay.fixed.vertical) or lay.fixed.horizontal
-            },
-            margins = margin_size,
-            widget = wibox.container.margin
-        },
+        top_group(c, orientation),
         -- Centre Section
-        {
-            -- Title and Drag events
-            {
-                {
-                    align = "center",
-                    widget = awful.titlebar.widget.titlewidget(c)
-                    -- layout = (vert and lay.flex.vertical) or lay.flex.horizontal
-                },
-                direction = "west",
-                widget = wibox.container.rotate
-            },
-            buttons = create_click_events(c),
-            layout = (vert and lay.flex.vertical) or lay.flex.horizontal
-        },
-        -- Bottom/Right Section
-        (c.type ~= "dialog" and --disable this section if dialog
-            {
-                -- Layout Control Buttons
-                {
-                    awful.titlebar.widget.ontopbutton(c),
-                    awful.titlebar.widget.floatingbutton(c),
-                    spacing = spacing_size,
-                    layout = (vert and lay.fixed.vertical) or lay.fixed.horizontal
-                },
-                margins = margin_size,
-                widget = wibox.container.margin
-            }) or
-            nil,
-        layout = (vert and lay.align.vertical) or lay.align.horizontal
+        middle_group(c, orientation, pos),
+        -- Bottom/Right Section--disable this section if dialog
+        (c.type ~= "dialog" and last_group(c, orientation)) or nil,
+        layout = wibox.layout.align[orientation]
     }
 end
 
