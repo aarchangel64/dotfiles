@@ -3,11 +3,14 @@ local gears = require("gears")
 local beautiful = require("beautiful")
 local wibox = require("wibox")
 local dpi = beautiful.xresources.apply_dpi
+local lay = wibox.layout
+
 awful.titlebar.enable_tooltip = true
 awful.titlebar.fallback_name = "Client"
 
 local margin_size = dpi(6)
 local spacing_size = dpi(7)
+local default_pos = "right"
 
 local double_click_event_handler = function(double_click_event)
     if double_click_timer then
@@ -59,18 +62,10 @@ local create_click_events = function(c)
     return buttons
 end
 
-local function create_titlebar(c, pos, bg, size, horizontal)
-    -- if (size == nil) then size = beautiful.titlebar_size
-     size = beautiful.titlebar_size
-
-    -- Check if passed position is valid
-    if (horizontal and pos ~= "top" and pos ~= "bottom") then
-        pos = "left"
-        bg = "#FF00FF"
-    elseif (pos ~= "left" and pos ~= "right") then
-        pos = "top"
-        bg = "#FF00FF"
-    end
+local function create_titlebar(c, bg, pos)
+    pos = pos or default_pos
+    local vert = (pos == "left" or pos == "right")
+    local size = beautiful.titlebar_size
 
     awful.titlebar(c, {position = pos, bg = bg, size = size}):setup {
         -- Top/Left Section
@@ -80,7 +75,8 @@ local function create_titlebar(c, pos, bg, size, horizontal)
                 awful.titlebar.widget.closebutton(c),
                 awful.titlebar.widget.maximizedbutton(c),
                 awful.titlebar.widget.minimizebutton(c),
-                spacing = spacing_size
+                spacing = spacing_size,
+                layout = (vert and lay.fixed.vertical) or lay.fixed.horizontal
             },
             margins = margin_size,
             widget = wibox.container.margin
@@ -88,35 +84,40 @@ local function create_titlebar(c, pos, bg, size, horizontal)
         -- Centre Section
         {
             -- Title and Drag events
-            -- {
-            --     align = "center",
-            --     widget = awful.titlebar.widget.titlewidget(c)
-            -- },
+            {
+                {
+                    align = "center",
+                    widget = awful.titlebar.widget.titlewidget(c)
+                    -- layout = (vert and lay.flex.vertical) or lay.flex.horizontal
+                },
+                direction = "west",
+                widget = wibox.container.rotate
+            },
             buttons = create_click_events(c),
-            -- layout = (horizontal and wibox.layout.flex.horizontal) or wibox.layout.flex.vertical
-            layout = wibox.layout.flex.vertical
+            layout = (vert and lay.flex.vertical) or lay.flex.horizontal
         },
         -- Bottom/Right Section
-        {
-            -- Layout Control Buttons
+        (c.type ~= "dialog" and --disable this section if dialog
             {
-                awful.titlebar.widget.ontopbutton(c),
-                awful.titlebar.widget.floatingbutton(c),
-                spacing = spacing_size,
-                -- layout = (horizontal and wibox.layout.fixed.horizontal) or wibox.layout.fixed.vertical
-                layout = wibox.layout.fixed.vertical
-            },
-            margins = margin_size,
-            widget = wibox.container.margin
-        },
-        -- layout = (horizontal and wibox.layout.align.horizontal) or wibox.layout.align.vertical
-        layout = wibox.layout.align.vertical
+                -- Layout Control Buttons
+                {
+                    awful.titlebar.widget.ontopbutton(c),
+                    awful.titlebar.widget.floatingbutton(c),
+                    spacing = spacing_size,
+                    layout = (vert and lay.fixed.vertical) or lay.fixed.horizontal
+                },
+                margins = margin_size,
+                widget = wibox.container.margin
+            }) or
+            nil,
+        layout = (vert and lay.align.vertical) or lay.align.horizontal
     }
 end
 
 local create_horizontal_bar = function(c, pos, bg, size)
     -- Check if passed position is valid
 
+    size = beautiful.titlebar_size
     awful.titlebar(c, {position = pos, bg = bg, size = size}):setup {
         {
             {
@@ -182,6 +183,7 @@ local create_horizontal_bar_dialog = function(c, pos, bg, size)
         bg = "#FF00FF"
     end
 
+    size = beautiful.titlebar_size
     awful.titlebar(c, {position = pos, bg = bg, size = size}):setup {
         {
             {
@@ -209,52 +211,52 @@ client.connect_signal(
         -- Customize here
         if c.type == "normal" then
             if c.class == "kitty" then
-                create_titlebar(c, "left", "#00000099")
+                create_titlebar(c, "#00000099")
             elseif c.class == "firefox" then
-                create_titlebar(c, "left", beautiful.background)
+                create_titlebar(c, beautiful.background)
             elseif c.class == "XTerm" or c.class == "UXTerm" then
                 create_horizontal_bar(c, "top", beautiful.xresources.get_current_theme().background)
             elseif c.class == "ark" or c.class == "dolphin" then
-                create_titlebar(c, "left", "#00000099")
+                create_titlebar(c, "#00000099")
             elseif c.instance == "transmission-qt" then
-                create_titlebar(c, "left", "#00000099")
+                create_titlebar(c, "#00000099")
             elseif c.class == "Gimp-2.10" or c.class == "Inkscape" then
-                create_titlebar(c, "left", beautiful.gtk.get_theme_variables().bg_color)
+                create_titlebar(c, beautiful.gtk.get_theme_variables().bg_color)
             elseif c.class == "Com.github.johnfactotum.Foliate" then
-                create_titlebar(c, "left", beautiful.gtk.get_theme_variables().bg_color)
+                create_titlebar(c, beautiful.gtk.get_theme_variables().bg_color)
             elseif c.class == "Arandr" then
-                create_titlebar(c, "left", beautiful.gtk.get_theme_variables().bg_color)
+                create_titlebar(c, beautiful.gtk.get_theme_variables().bg_color)
             elseif c.class == "Ettercap" then
-                create_titlebar(c, "left", beautiful.gtk.get_theme_variables().base_color)
+                create_titlebar(c, beautiful.gtk.get_theme_variables().base_color)
             elseif c.class == "Google-chrome" or c.class == "Chromium" then
-                create_titlebar(c, "left", beautiful.gtk.get_theme_variables().base_color)
+                create_titlebar(c, beautiful.gtk.get_theme_variables().base_color)
             elseif c.class == "TelegramDesktop" then
-                create_titlebar(c, "left", "#17212b")
+                create_titlebar(c, "#17212b")
             elseif c.class == "Kvantum Manager" then
-                create_titlebar(c, "left", "#00000099")
+                create_titlebar(c, "#00000099")
             elseif c.class == "qt5ct" then
-                create_titlebar(c, "left", "#00000099")
+                create_titlebar(c, "#00000099")
             elseif c.class == "Nemo" then
                 create_horizontal_bar(c, "top", beautiful.gtk.get_theme_variables().base_color)
             else
-                create_titlebar(c, "left", beautiful.background)
+                create_titlebar(c, beautiful.background)
             end
         elseif c.type == "dialog" then
             if c.role == "GtkFileChooserDialog" then
-                create_titlebar_dialog(c, "left", beautiful.gtk.get_theme_variables().bg_color)
+                create_titlebar_dialog(c, beautiful.gtk.get_theme_variables().bg_color)
             elseif c.class == "firefox" then
-                create_titlebar_dialog(c, "left", beautiful.gtk.get_theme_variables().bg_color)
+                create_titlebar_dialog(c, beautiful.gtk.get_theme_variables().bg_color)
             elseif c.class == "Gimp-2.10" then
-                create_titlebar_dialog(c, "left", beautiful.gtk.get_theme_variables().bg_color)
+                create_titlebar_dialog(c, beautiful.gtk.get_theme_variables().bg_color)
             elseif c.class == "Arandr" then
-                create_titlebar(c, "left", beautiful.gtk.get_theme_variables().bg_color)
+                create_titlebar(c, beautiful.gtk.get_theme_variables().bg_color)
             else
-                create_titlebar_dialog(c, "left", "#00000099")
+                create_titlebar_dialog(c, "#00000099")
             end
         elseif c.type == "modal" then
-            create_titlebar(c, "left", "#00000099")
+            create_titlebar(c, "#00000099")
         else
-            create_titlebar(c, "left", beautiful.background)
+            create_titlebar(c, beautiful.background)
         end
     end
 )
