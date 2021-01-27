@@ -11,6 +11,7 @@
 - link:
     ~/.gitconfig:
     ~/.tmux.conf:
+    ~/.config/picom.conf:
     ~/.Xresources:
     ~/.xprofile:
     ~/.config/awesome:

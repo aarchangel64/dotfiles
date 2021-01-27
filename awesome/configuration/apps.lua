@@ -52,7 +52,7 @@ return {
     -- List of apps to start once on start-up
     run_on_start_up = {
         -- Compositor
-        "picom -b --experimental-backends --dbus --config " .. config_dir .. "/configuration/picom.conf",
+        "picom -b --experimental-backends --dbus",
         -- Blueman applet
         "blueman-applet",
         -- Music server
