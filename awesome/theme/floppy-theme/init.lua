@@ -3,6 +3,7 @@ local theme_dir = filesystem.get_configuration_dir() .. "/theme"
 
 local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
+local gtk_variable = beautiful.gtk.get_theme_variables
 
 local theme = {}
 
@@ -50,6 +51,18 @@ theme.awesome_icon = theme.icons .. "awesome.svg"
 local awesome_overrides = function(theme)
     -- Titlebar
     theme.titlebar_size = dpi(26)
+
+    -- Client Decorations
+
+    -- Borders
+    -- theme.border_focus = "#fc9a9a" .. "36"
+    -- theme.border_normal = "#1c1c1c" .. ""
+    -- theme.border_marked = "#CC9393"
+    -- theme.border_width = dpi(1)
+    -- theme.border_radius = dpi(9)
+
+    -- Decorations
+    theme.useless_gap = dpi(3)
 end
 
 return {
