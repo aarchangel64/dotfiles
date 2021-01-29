@@ -53,12 +53,17 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-(add-hook 'lua-mode-hook #'lsp!)
+;; (add-hook 'lua-mode-hook #'lsp!)
 
 ;; (after! lsp-lua
 ;;   (setq lsp-clients-lua-language-server-bin "/usr/bin/lua-language-server")
 ;;   (setq lsp-clients-lua-language-server-install-dir "/usr/bin/")
 ;;   )
+
+
+(use-package! fennel-mode
+  :mode "\\.fnl\\'")
+
 
 (add-hook! fish-mode
   (set-company-backend! 'fish-mode '(company-shell company-shell-env company-fish-shell company-files))

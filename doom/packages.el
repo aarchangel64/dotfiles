@@ -16,6 +16,7 @@
 ;  :recipe (:host github :repo "username/repo"))
 
 (package! lsp-julia :recipe (:host github :repo "non-jedi/lsp-julia"))
+(package! fennel-mode :recipe (:host gitlab :repo "technomancy/fennel-mode"))
 
 ;; (package! elfmt
 ;;   :recipe (:host github :repo "riscy/elfmt"))
