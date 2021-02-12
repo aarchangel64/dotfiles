@@ -32,7 +32,8 @@
            ;; Default GUI package manager
            :package_manager  "pamac-manager"
            ;; Default locker
-           ;; :lock  'awesome-client "awesome.emit_signal(\'module::lockscreen_show\')" 'lock  "dm-tool lock"
+           ;; :lock "awesome-client 'awesome.emit_signal(\'module::lockscreen_show\')'
+	   :lock  "dm-tool lock"
            ;; Default quake terminal
            :quake  "kitty --name QuakeTerminal"
            ;; Default rofi global menu
