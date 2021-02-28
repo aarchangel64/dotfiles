@@ -61,9 +61,12 @@
 ;;   )
 
 
+(setq pdf-view-use-scaling t)
+
 (use-package! fennel-mode
   :mode "\\.fnl\\'")
 
+(setq ispell-alternate-dictionary "/usr/bin/look")
 
 (add-hook! fish-mode
   (set-company-backend! 'fish-mode '(company-shell company-shell-env company-fish-shell company-files))
