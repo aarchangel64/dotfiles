@@ -36,6 +36,21 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'relative)
 
+
+(setq frame-title-format
+      '(""
+        (:eval
+         (if (s-contains-p org-roam-directory (or buffer-file-name ""))
+             (replace-regexp-in-string
+              ".*/[0-9]*-?" "☰ "
+              (subst-char-in-string ?_ ?  buffer-file-name))
+           "%b"))
+        (:eval
+         (let ((project-name (projectile-project-name)))
+           (unless (string= "-" project-name)
+             (format (if (buffer-modified-p)  " ◉ %s" "  ●  %s") project-name))))))
+
+
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
@@ -61,12 +76,19 @@
 ;;   )
 
 
-(setq pdf-view-use-scaling t)
-
 (use-package! fennel-mode
   :mode "\\.fnl\\'")
 
 (setq ispell-alternate-dictionary "/usr/bin/look")
+
+(use-package! aggressive-indent
+  :hook
+  (org-mode . aggressive-indent-mode)
+  (latex-mode . aggressive-indent-mode)
+  (emacs-lisp-mode . aggressive-indent-mode)
+  )
+
+(setq pdf-view-use-scaling t)
 
 (add-hook! fish-mode
   (set-company-backend! 'fish-mode '(company-shell company-shell-env company-fish-shell company-files))
@@ -88,3 +110,4 @@
 
 ;; (load! "project")
 (load! "mapping")
+(load! "latex-config")
