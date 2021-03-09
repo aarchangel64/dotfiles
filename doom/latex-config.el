@@ -1,29 +1,98 @@
 
 ;;; Code:
-;; auctex options
-(after! auctex
-  ;; (setq preview-image-type 'dvipng)
-  (setq TeX-engine 'xetex)
-  (setq TeX-fold-type-list '(env macro math))
-  )
-;; (global-prettify-symbols-mode t)
 
+;; auctex options
+(setq preview-image-type 'dvipng
+      TeX-fold-type-list '(env macro math))
+(setq-default TeX-engine 'xetex)
 
 ;; math-preview options
+(defun custom-preview-marks (envs)
+  (mapcan (lambda (env) (list (cons (concat "\\begin{" env "}") (concat "\\end{" env "}"))
+                              (cons (concat "\\begin{" env "*}") (concat "\\end{" env "*}"))))
+          envs))
+
 (use-package! math-preview
   :hook tex-mode
+  :commands (goat/math-preview)
   :custom
   (math-preview-scale 3)
   (math-preview-raise 0.5)
   (math-preview-margin '(5 . 20))
+  (math-preview-marks (append (custom-preview-marks '("equation" "gather" "align"))
+                              '(("\\[" . "\\]")
+                                ("\\(" . "\\)")
+                                ("$$" . "$$")
+                                ("$" . "$"))
+                              ))
+  (math-preview-preprocess-functions '((lambda (s)
+                                         (replace-regexp-in-string "&" "" s))))
   :config
+  (defun goat/math-preview ()
+    "deals with auctex folding before activates math-preview-all"
+    (interactive)
+    (->> (math-preview--find-gaps (point-min) (point-max))
+         (--map (math-preview--search (car it) (cdr it)))
+         (-flatten)
+         (--map (progn
+                  (message "test %s %s" (car it) (cdr it))
+                  (TeX-fold-clearout-region (car it) (cdr it))
+                  (math-preview--submit (car it) (cdr it)
+                                        (math-preview--strip-marks
+                                         (buffer-substring (car it) (cdr it))))))))
   ;; (math-preview-all)
+
   )
 
-;; Make tex folding symbols betterer
-;; From https://tecosaur.github.io/emacs-config/config.html#editor-visuals
+;; (after! math-preview
+
+;; (math-preview--overlays)
+;; (LaTeX-mark-environment)
+;; (TeX-fold-clearout-region)
+;; (math-preview-all))
+;; )
+
+
+(map! :map LaTeX-mode-map
+      :localleader
+      :desc "Inline Preview" "p" #'goat/math-preview)
+
+
+;; Based on https://tecosaur.github.io/emacs-config/config.html
+;; (add-hook 'latex-mode-hook #'TeX-latex-mode)
+
+(map! :map cdlatex-mode-map
+      :i "TAB" #'cdlatex-tab)
+
+(use-package! cdlatex
+  :hook tex-mode
+  :custom
+  ;; (cdlatex-math-symbol-prefix ?\;) ;; doesn't work at the moment :(
+  (cdlatex-math-symbol-alist
+   '(;; adding missing functions to 3rd level symbols
+     (?_    ("\\downarrow"  ""           "\\inf"))
+     (?2    ("^2"           "\\sqrt{?}"     ""     ))
+     (?3    ("^3"           "\\sqrt[3]{?}"  ""     ))
+     (?^    ("\\uparrow"    ""           "\\sup"))
+     (?k    ("\\kappa"      ""           "\\ker"))
+     (?m    ("\\mu"         ""           "\\lim"))
+     (?c    (""             "\\circ"     "\\cos"))
+     (?d    ("\\delta"      "\\partial"  "\\dim"))
+     (?D    ("\\Delta"      "\\nabla"    "\\deg"))
+     ;; no idea why \Phi isnt on 'F' in first place, \phi is on 'f'.
+     (?F    ("\\Phi"))
+     ;; now just conveniance
+     (?.    ("\\cdot" "\\dots"))
+     (?:    ("\\vdots" "\\ddots"))
+     (?*    ("\\times" "\\star" "\\ast"))))
+  (cdlatex-math-modify-alist
+   '(;;my own stuff
+     (?B    "\\mathbb"        nil          t    nil  nil)
+     (?a    "\\abs"           nil          t    nil  nil))))
+
+;; Visuals
 (add-hook 'LaTeX-mode-hook #'mixed-pitch-mode)
-(after! latex (setcar (assoc "⋆" LaTeX-fold-math-spec-list) "★")) ;; make \star bigger
+;; Make symbols betterer
 (setq TeX-fold-math-spec-list
       `(;; missing/better symbols
         ("≤" ("le"))
@@ -91,8 +160,8 @@
         ("¶ {1}" ("paragraph" "paragraph*"))
         ("¶¶ {1}" ("subparagraph" "subparagraph*"))
         ;; extra
-        ("⬖ {1}" ("begin"))
-        ("⬗ {1}" ("end"))
+        ("｢{1}" ("begin"))
+        ("{1}｣" ("end"))
         ))
 (defun string-offset-roman-chars (offset word)
   "Shift the codepoint of each charachter in WORD by OFFSET with an extra -6 shift if the letter is lowercase"
@@ -139,7 +208,7 @@ Such special cases should be remapped to another value, as given in `string-offs
   (if (assoc char string-offset-roman-char-exceptions)
       (cdr (assoc char string-offset-roman-char-exceptions))
     char))
-(defun TeX-fold-parenthesize-as-neccesary (tokens &optional suppress-left suppress-right)
+(defun TeX-fold-parenthesize-as-neccesary (tokens optional suppress-left suppress-right)
   "Add ❪ ❫ parenthesis as if multiple LaTeX tokens appear to be present"
   (if (TeX-string-single-token-p tokens) tokens
     (concat (if suppress-left "" "❪")

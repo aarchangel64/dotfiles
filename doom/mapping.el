@@ -8,7 +8,7 @@
   )
 
 (map! :map evil-window-map
-      "SPC" #'rotate-layout
+      ;; "SPC" #'rotate-layout
       ;; Navigation
       "<left>"          #'evil-window-left
       "<up>"            #'evil-window-up
@@ -16,10 +16,6 @@
       "<down>"          #'evil-window-down
       )
 
-(map! :map LaTeX-mode-map
-      :localleader
-      :desc "Inline Preview" "p" #'math-preview-all
-      )
 
 (map! :n [mouse-8] #'better-jumper-jump-backward
       :n [mouse-9] #'better-jumper-jump-forward
