@@ -1,6 +1,64 @@
 
 ;;; Code:
 
+
+;; (add-to-list 'org-export-latex-classes
+;;              '("book"
+;;                "\\documentclass[10pt]{memoir}"
+;;                ("\\chapter{%s}" . "\\chapter*{%s}")
+;;                ("\\section{%s}" . "\\section*{%s}")
+;;                ("\\subsection{%s}" . "\\subsection*{%s}")
+;;                ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+;;                ("\\paragraph{%s}" . "\\paragraph*{%s}")
+;;                ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+;;              )
+
+
+(after! ox-latex
+  (add-to-list 'org-latex-classes
+               '("memoir" "
+\\documentclass{memoir}[12pt,oneside,openany,a4paper,notitlepage]
+\\usepackage[utf8]{inputenc} %
+\\usepackage[T1]{fontenc}    %
+\\usepackage[final]{microtype} % Less badboxes
+\\usepackage{titlesec}
+\\usepackage[bottom=2cm,top=3cm,left=2cm,right=2cm]{geometry}
+\\titleformat{\\chapter}{}{}{0em}{\\bfseries\\Huge}
+\\titleformat{\\subsection}{}{}{0em}{\\bfseries\\large}
+\\setcounter{secnumdepth}{0}
+\\setcounter{tocdepth}{3}
+
+\\newlength{\\drop}
+\\newcommand*{\\titleGM}[4]{
+\\drop=0.1\\textheight
+\\hbox{%
+\\hspace*{0.05\\textwidth}%
+\\rule{1pt}{\\textheight}
+\\hspace*{0.05\\textwidth}%
+\\parbox[b]{0.95\\textwidth}{
+\\vbox{%
+\\vspace{\\drop}
+{\\noindent\\HUGE\\bfseries #1 \\\\[0.5\\baselineskip]
+}\\\\[2\\baselineskip]
+{\\Large\\itshape #2}\\\\[4\\baselineskip]
+{\\Large #3}\\par
+\\vspace{0.5\\textheight}
+{\\noindent #4}\\\\[\\baselineskip]
+}% end of vbox
+}% end of parbox
+}% end of hbox
+}
+"
+                 ("\\chapter{%s}" . "\\chapter*{%s}")
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
+  (setq org-latex-title-command "\\titleGM{%t}{%s}{%a}{%D} \\thispagestyle{empty} \\clearpage"))
+
+
 ;; auctex options
 (setq preview-image-type 'dvipng
       TeX-fold-type-list '(env macro math))
@@ -23,8 +81,7 @@
                               '(("\\[" . "\\]")
                                 ("\\(" . "\\)")
                                 ("$$" . "$$")
-                                ("$" . "$"))
-                              ))
+                                ("$" . "$"))))
   (math-preview-preprocess-functions '((lambda (s)
                                          (replace-regexp-in-string "&" "" s))))
   :config
@@ -32,16 +89,15 @@
     "deals with auctex folding before activates math-preview-all"
     (interactive)
     (->> (math-preview--find-gaps (point-min) (point-max))
-         (--map (math-preview--search (car it) (cdr it)))
-         (-flatten)
-         (--map (progn
-                  (message "test %s %s" (car it) (cdr it))
-                  (TeX-fold-clearout-region (car it) (cdr it))
-                  (math-preview--submit (car it) (cdr it)
-                                        (math-preview--strip-marks
-                                         (buffer-substring (car it) (cdr it))))))))
+      (--map (math-preview--search (car it) (cdr it)))
+      (-flatten)
+      (--map (progn
+               (message "test %s %s" (car it) (cdr it))
+               (TeX-fold-clearout-region (car it) (cdr it))
+               (math-preview--submit (car it) (cdr it)
+                                     (math-preview--strip-marks
+                                      (buffer-substring (car it) (cdr it))))))))
   ;; (math-preview-all)
-
   )
 
 ;; (after! math-preview
@@ -70,25 +126,28 @@
   ;; (cdlatex-math-symbol-prefix ?\;) ;; doesn't work at the moment :(
   (cdlatex-math-symbol-alist
    '(;; adding missing functions to 3rd level symbols
-     (?_    ("\\downarrow"  ""           "\\inf"))
-     (?2    ("^2"           "\\sqrt{?}"     ""     ))
-     (?3    ("^3"           "\\sqrt[3]{?}"  ""     ))
-     (?^    ("\\uparrow"    ""           "\\sup"))
-     (?k    ("\\kappa"      ""           "\\ker"))
-     (?m    ("\\mu"         ""           "\\lim"))
-     (?c    (""             "\\circ"     "\\cos"))
-     (?d    ("\\delta"      "\\partial"  "\\dim"))
-     (?D    ("\\Delta"      "\\nabla"    "\\deg"))
+     (?_ ("\\downarrow" "" "\\inf"))
+     (?2 ("^2" "\\sqrt{?}" ""))
+     (?3 ("^3" "\\sqrt[3]{?}" ""))
+     (?^ ("\\uparrow" "" "\\sup"))
+     (?k ("\\kappa" "" "\\ker"))
+     (?m ("\\mu" "" "\\lim"))
+     (?c ("" "\\circ" "\\cos"))
+     (?d ("\\delta" "\\partial" "\\dim"))
+     (?D ("\\Delta" "\\nabla" "\\deg"))
      ;; no idea why \Phi isnt on 'F' in first place, \phi is on 'f'.
-     (?F    ("\\Phi"))
+     (?F ("\\Phi"))
      ;; now just conveniance
-     (?.    ("\\cdot" "\\dots"))
-     (?:    ("\\vdots" "\\ddots"))
-     (?*    ("\\times" "\\star" "\\ast"))))
+     (?. ("\\cdot" "\\dots"))
+     (?: ("\\vdots" "\\ddots"))
+     (?* ("\\times" "\\star" "\\ast"))))
   (cdlatex-math-modify-alist
    '(;;my own stuff
-     (?B    "\\mathbb"        nil          t    nil  nil)
-     (?a    "\\abs"           nil          t    nil  nil))))
+     (?B "\\mathbb" nil t nil nil)
+     (?a "\\abs" nil t nil nil)))
+  (cdlatex-command-alist
+   '(
+     ("ssu" "Insert starred subsection" "\\subsection*{?}" cdlatex-position-cursor nil t nil))))
 
 ;; Visuals
 (add-hook 'LaTeX-mode-hook #'mixed-pitch-mode)
@@ -134,8 +193,7 @@
         (,(lambda (word) (string-offset-roman-chars 120003 word)) ("mathfrak"))
         (,(lambda (word) (string-offset-roman-chars 120055 word)) ("mathbb"))
         (,(lambda (word) (string-offset-roman-chars 120159 word)) ("mathsf"))
-        (,(lambda (word) (string-offset-roman-chars 120367 word)) ("mathtt"))
-        )
+        (,(lambda (word) (string-offset-roman-chars 120367 word)) ("mathtt")))
       TeX-fold-macro-spec-list
       '(
         ;; as the defaults
@@ -150,7 +208,7 @@
         ;; tweaked defaults
         ("©" ("copyright"))
         ("®" ("textregistered"))
-        ("™"  ("texttrademark"))
+        ("™" ("texttrademark"))
         ("[1]:||►" ("item"))
         ("❡❡ {1}" ("part" "part*"))
         ("❡ {1}" ("chapter" "chapter*"))
@@ -161,8 +219,7 @@
         ("¶¶ {1}" ("subparagraph" "subparagraph*"))
         ;; extra
         ("｢{1}" ("begin"))
-        ("{1}｣" ("end"))
-        ))
+        ("{1}｣" ("end"))))
 (defun string-offset-roman-chars (offset word)
   "Shift the codepoint of each charachter in WORD by OFFSET with an extra -6 shift if the letter is lowercase"
   (apply 'string
@@ -172,34 +229,34 @@
                  word)))
 (defvar string-offset-roman-char-exceptions
   '(;; lowercase serif
-    (119892 .  8462) ; ℎ
+    (119892 . 8462)                     ; ℎ
     ;; lowercase caligraphic
-    (119994 . 8495) ; ℯ
-    (119996 . 8458) ; ℊ
-    (120004 . 8500) ; ℴ
+    (119994 . 8495)                     ; ℯ
+    (119996 . 8458)                     ; ℊ
+    (120004 . 8500)                     ; ℴ
     ;; caligraphic
-    (119965 . 8492) ; ℬ
-    (119968 . 8496) ; ℰ
-    (119969 . 8497) ; ℱ
-    (119971 . 8459) ; ℋ
-    (119972 . 8464) ; ℐ
-    (119975 . 8466) ; ℒ
-    (119976 . 8499) ; ℳ
-    (119981 . 8475) ; ℛ
+    (119965 . 8492)                     ; ℬ
+    (119968 . 8496)                     ; ℰ
+    (119969 . 8497)                     ; ℱ
+    (119971 . 8459)                     ; ℋ
+    (119972 . 8464)                     ; ℐ
+    (119975 . 8466)                     ; ℒ
+    (119976 . 8499)                     ; ℳ
+    (119981 . 8475)                     ; ℛ
     ;; fraktur
-    (120070 . 8493) ; ℭ
-    (120075 . 8460) ; ℌ
-    (120076 . 8465) ; ℑ
-    (120085 . 8476) ; ℜ
-    (120092 . 8488) ; ℨ
+    (120070 . 8493)                     ; ℭ
+    (120075 . 8460)                     ; ℌ
+    (120076 . 8465)                     ; ℑ
+    (120085 . 8476)                     ; ℜ
+    (120092 . 8488)                     ; ℨ
     ;; blackboard
-    (120122 . 8450) ; ℂ
-    (120127 . 8461) ; ℍ
-    (120133 . 8469) ; ℕ
-    (120135 . 8473) ; ℙ
-    (120136 . 8474) ; ℚ
-    (120137 . 8477) ; ℝ
-    (120145 . 8484) ; ℤ
+    (120122 . 8450)                     ; ℂ
+    (120127 . 8461)                     ; ℍ
+    (120133 . 8469)                     ; ℕ
+    (120135 . 8473)                     ; ℙ
+    (120136 . 8474)                     ; ℚ
+    (120137 . 8477)                     ; ℝ
+    (120145 . 8484)                     ; ℤ
     )
   "An alist of deceptive codepoints, and then where the glyph actually resides.")
 (defun string-offset-apply-roman-char-exceptions (char)

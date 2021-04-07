@@ -1,13 +1,13 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-;; Place your private configuration here! Remember, you do not need to run 'doom
-;; sync' after modifying this file!
-
-
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Shrey Pasricha"
       user-mail-address "shrey.pasricha@gmail.com")
+
+
+
+;;; =================================== Visuals ===================================
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -23,10 +23,9 @@
 (setq doom-font "Iosevka SS07-12"
       doom-variable-pitch-font "Iosevka Aile-12")
 
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. 'doom-one' is the default. doom-henna is also quite nice
-(setq doom-theme 'doom-henna)
+;; Default: 'doom-one'
+;; My favourites: doom-henna, doom-horizon, doom-challenger-deep
+(setq doom-theme 'doom-horizon)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -36,6 +35,7 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'visual)
 
+;; Set title frame to show current buffer name, save state, and project
 (setq frame-title-format
       '(""
         (replace-regexp-in-string ".*/[0-9]*-?" "☰ " (subst-char-in-string ?_ ?  buffer-file-name))
@@ -43,10 +43,7 @@
         (:eval
          (let ((project-name (projectile-project-name)))
            (unless (string= "-" project-name)
-             (format (if (buffer-modified-p)  " ◉ %s" "  ●  %s") project-name)))
-         )
-        )
-      )
+             (format (if (buffer-modified-p) " ◉ %s" "  ●  %s") project-name))))))
 
 ;; From https://tecosaur.github.io/emacs-config/config.html#which-key
 (setq which-key-idle-delay 0.5) ;; I need the help, I really do
@@ -56,51 +53,24 @@
   (pushnew!
    which-key-replacement-alist
    '(("" . "\\`+?evil[-:]?\\(?:a-\\)?\\(.*\\)") . (nil . "◂\\1"))
-   '(("\\`g s" . "\\`evilem--?motion-\\(.*\\)") . (nil . "◃\\1"))
-   ))
-
-;; Here are some additional functions/macros that could help you configure Doom:
-;;
-;; - `load!' for loading external *.el files relative to this one
-;; - `use-package!' for configuring packages
-;; - `after!' for running code after a package has loaded
-;; - `add-load-path!' for adding directories to the `load-path', relative to
-;;   this file. Emacs searches the `load-path' when you load packages with
-;;   `require' or `use-package'.
-;; - `map!' for binding new keys
-;;
-;; To get information about any of these functions/macros, move the cursor over
-;; the highlighted symbol at press 'K' (non-evil users must press 'C-c c k').
-;; This will open documentation for it, including demos of how they are used.
-;;
-;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
-;; they are implemented.
-
-;; (add-hook 'lua-mode-hook #'lsp!)
-
-;; (after! lsp-lua
-;;   (setq lsp-clients-lua-language-server-bin "/usr/bin/lua-language-server")
-;;   (setq lsp-clients-lua-language-server-install-dir "/usr/bin/")
-;;   )
+   '(("\\`g s" . "\\`evilem--?motion-\\(.*\\)") . (nil . "◃\\1"))))
 
 
-(use-package! fennel-mode
-  :mode "\\.fnl\\'")
 
+;;; ============================== MISC CONFIGURATION =============================
+
+;; I needed this to get spell checking to work
 (setq ispell-alternate-dictionary "/usr/bin/look")
 
+;; agressively indent in these modes
 (use-package! aggressive-indent
   :hook
   (org-mode . aggressive-indent-mode)
   (latex-mode . aggressive-indent-mode)
-  (emacs-lisp-mode . aggressive-indent-mode)
-  )
+  (emacs-lisp-mode . aggressive-indent-mode))
 
+;; Make PDFs (and SVGs?) look nicer (mayyybe)
 (setq pdf-view-use-scaling t)
-
-(add-hook! fish-mode
-  (set-company-backend! 'fish-mode '(company-shell company-shell-env company-fish-shell company-files))
-  )
 
 ;; Open lookups in new window: https://github.com/hlissner/doom-emacs/issues/3397
 ;; (dolist (fn '(definition references documentation))
@@ -115,7 +85,52 @@
 ;;             (goto-char pt)
 ;;             (funcall (intern (format "+lookup/%s" fn)) identifier arg)))))
 
+;;; =========================== LANGUAGE CONFIGURATIONS ===========================
 
+;; Lua / Fennel
+(use-package! fennel-mode
+  :mode "\\.fnl\\'"
+  :config)
+
+(after! mode-local
+  (add-hook 'fennel-mode-hook
+            (lambda ()
+              (setq-mode-local fennel-mode compile-command '(format "fennel --compile %1$s.fnl > %1$s.lua" (file-name-sans-extension (buffer-file-name)))))))
+
+;; (add-hook 'lua-mode-hook #'lsp!)
+;; (after! lsp-lua
+;;   (setq lsp-clients-lua-language-server-bin "/usr/bin/lua-language-server")
+;;   (setq lsp-clients-lua-language-server-install-dir "/usr/bin/")
+;;   )
+
+;; Arch Linux PKGBUILD
+(use-package! pkgbuild-mode
+  :mode "/PKGBUILD$")
+
+;; Rust
+(after! rustic
+  (setq rustic-lsp-server 'rust-analyzer))
+
+;; C/C++
+(setq lsp-clients-clangd-args '("-j=16"
+                                "--enable-config"
+                                "--background-index"
+                                ;; "--clang-tidy"
+                                "--completion-style=detailed"
+                                "--cross-file-rename"
+                                "--suggest-missing-includes"
+                                "--recovery-ast"
+                                "--header-insertion=never"
+                                "--fallback-style=Microsoft"))
+(after! lsp-clangd (set-lsp-priority! 'clangd 2))
+
+;; Fish shell
+(add-hook! fish-mode
+  (set-company-backend! 'fish-mode '(company-shell company-shell-env company-fish-shell company-files)))
+
+
+
+;;; =============================== External Configs ==============================
 ;; (load! "project")
 (load! "mapping")
 (load! "latex-config")
