@@ -11,15 +11,26 @@
 - link:
     ~/.gitconfig:
     ~/.tmux.conf:
-    ~/.config/picom.conf:
     ~/.Xresources:
     ~/.xprofile:
+    ~/.ideavimrc:
     ~/.config/awesome:
     ~/.config/kitty:
     ~/.config/qmk:
     ~/.config/doom:
     ~/.config/pulse:
     ~/.config/chemacs:
+    ~/.config/picom.conf:
+    ~/.config/nvim:
+    ~/.config/clangd:
+
+    ~/.config/GIMP/2.10:
+      path: GIMP/2.10/*
+      glob: true
+
+    ~/.config/kicad/5.99:
+      path: kicad/5.99/*
+      glob: true
 
     ~/.config/fish/functions:
       path: fish/functions/*.fish
