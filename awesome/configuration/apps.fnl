@@ -33,7 +33,7 @@
            :package_manager  "pamac-manager"
            ;; Default locker
            ;; :lock "awesome-client 'awesome.emit_signal(\'module::lockscreen_show\')'
-	   :lock  "dm-tool lock"
+	       :lock  "dm-tool lock"
            ;; Default quake terminal
            :quake  "kitty --name QuakeTerminal"
            ;; Default rofi global menu
@@ -54,18 +54,19 @@
                    ;; Blueman applet
                    "blueman-applet"
                    ;; Music server
-                   "mpd"
+                   ;; "mpd"
                    ;; Polkit and keyring
-                   (.. "/usr/bin/lxqt-policykit-agent &" " eval $(gnome-keyring-daemon -s --componentspkcs11,secrets,ssh,gpg)")
+                   (.. "/usr/lib/polkit-kde-authentication-agent-1 &" " eval $(gnome-keyring-daemon -s --componentspkcs11,secrets,ssh,gpg)")
                    ;; Load X colors
                    "xrdb $HOME/.Xresources"
                    ;; Audio equalizer
                    ;; 'pulseeffects --gapplication-service'
                    ;; Lockscreen timer
-                   "xidlehook --not-when-fullscreen --not-when-audio --timer 600 awesome-client 'awesome.emit_signal(\"module::lockscreen_show\")'"
+                   ;; "xidlehook --not-when-fullscreen --not-when-audio --timer 600 awesome-client 'awesome.emit_signal(\"module::lockscreen_show\")'"
                    ;; You can add more start-up applications here
                    "xsetroot -cursor_name left_ptr"
                    "feh --bg-fill $HOME/Pictures/Wallpapers/rocket_girl.png"
+                   "copyq"
                    ]
 ;; List of binaries/shell scripts that will execute for a certain task
 :utils {

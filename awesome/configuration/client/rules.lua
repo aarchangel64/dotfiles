@@ -91,6 +91,21 @@ ruled.client.connect_signal(
             }
         }
 
+	-- Maximised / No titlebars
+	ruled.client.append_rule {
+		id = "maxed",
+		rule_any = {
+			class = {
+				"Bitwig Studio"
+			}
+		},
+		properties = {
+			titlebars_enabled = false,
+			skip_decoration = true
+		}
+	}
+
+
         -- Splash
         ruled.client.append_rule {
             id = "splash",

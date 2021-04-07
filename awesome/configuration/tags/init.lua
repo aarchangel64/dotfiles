@@ -58,6 +58,7 @@ tag.connect_signal(
         awful.layout.append_default_layouts(
             {
                 awful.layout.suit.tile,
+                awful.layout.suit.tile.left,
                 awful.layout.suit.floating
             }
         )
