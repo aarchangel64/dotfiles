@@ -1,0 +1,31 @@
+map <Space> <nop>
+map <Space> <leader>
+let mapleader = "\<Space>"
+
+" Plugins
+set surround
+" set multiple-cursors
+set commentary
+set easymotion
+
+set ideajoin
+set visualbell
+set relativenumber
+
+map <leader>d <Action>(GotoDeclaration)
+map <leader>i <Action>(GotoImplementation)
+map <leader>r <Action>(RunClass)
+map <leader>db <Action>(Debug)
+map <leader>e <Action>(ShowErrorDescription)
+map <leader>cf <Action>(ReformatCode)
+map <leader>cr <Action>(Refactorings.QuickListPopupAction)
+" map <A-S-Right> <Action>(ActivateProjectToolWindow)
+
+" recursive folding commands
+nnoremap zC <Action>(CollapseRegionRecursively)
+nnoremap zO <Action>(ExpandRegionRecursively)
+
+map <leader>f <Plug>(easymotion-s)
+
+" set easymotion to use only a single leader press
+" map <leader> <Plug>(easymotion-prefix)
