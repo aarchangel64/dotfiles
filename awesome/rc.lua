@@ -1,7 +1,6 @@
 -- ░█▀▀░█░░░█▀█░█▀█░█▀█░█░█
 -- ░█▀▀░█░░░█░█░█▀▀░█▀▀░░█░
 -- ░▀░░░▀▀▀░▀▀▀░▀░░░▀░░░░▀░
--- Banner generated using `toilet -f pagga AwesomeWM"
 
 local gears = require("gears")
 local beautiful = require("beautiful")
@@ -11,7 +10,6 @@ require("awful.autofocus")
 -- ░█▀▀░█░█░█▀▀░█░░░█░░
 -- ░▀▀█░█▀█░█▀▀░█░░░█░░
 -- ░▀▀▀░▀░▀░▀▀▀░▀▀▀░▀▀▀
-
 awful.util.shell = "sh"
 
 -- ░▀█▀░█░█░█▀▀░█▄█░█▀▀
@@ -45,9 +43,7 @@ require("module.exit-screen")
 require("module.quake-terminal")
 require("module.menu")
 require("module.titlebar")
---require('module.brightness-osd')
 require("module.volume-osd")
---require('module.lockscreen')
 -- require('module.dynamic-wallpaper')
 
 -- ░█░█░█▀█░█░░░█░░░█▀█░█▀█░█▀█░█▀▀░█▀▄
