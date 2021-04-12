@@ -1,63 +1,6 @@
+;;; ../../.dotfiles/doom/lang/latex.el -*- lexical-binding: t; -*-
 
-;;; Code:
-
-
-;; (add-to-list 'org-export-latex-classes
-;;              '("book"
-;;                "\\documentclass[10pt]{memoir}"
-;;                ("\\chapter{%s}" . "\\chapter*{%s}")
-;;                ("\\section{%s}" . "\\section*{%s}")
-;;                ("\\subsection{%s}" . "\\subsection*{%s}")
-;;                ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-;;                ("\\paragraph{%s}" . "\\paragraph*{%s}")
-;;                ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
-;;              )
-
-
-(after! ox-latex
-  (add-to-list 'org-latex-classes
-               '("memoir" "
-\\documentclass{memoir}[12pt,oneside,openany,a4paper,notitlepage]
-\\usepackage[utf8]{inputenc} %
-\\usepackage[T1]{fontenc}    %
-\\usepackage[final]{microtype} % Less badboxes
-\\usepackage{titlesec}
-\\usepackage[bottom=2cm,top=3cm,left=2cm,right=2cm]{geometry}
-\\titleformat{\\chapter}{}{}{0em}{\\bfseries\\Huge}
-\\titleformat{\\subsection}{}{}{0em}{\\bfseries\\large}
-\\setcounter{secnumdepth}{0}
-\\setcounter{tocdepth}{3}
-
-\\newlength{\\drop}
-\\newcommand*{\\titleGM}[4]{
-\\drop=0.1\\textheight
-\\hbox{%
-\\hspace*{0.05\\textwidth}%
-\\rule{1pt}{\\textheight}
-\\hspace*{0.05\\textwidth}%
-\\parbox[b]{0.95\\textwidth}{
-\\vbox{%
-\\vspace{\\drop}
-{\\noindent\\HUGE\\bfseries #1 \\\\[0.5\\baselineskip]
-}\\\\[2\\baselineskip]
-{\\Large\\itshape #2}\\\\[4\\baselineskip]
-{\\Large #3}\\par
-\\vspace{0.5\\textheight}
-{\\noindent #4}\\\\[\\baselineskip]
-}% end of vbox
-}% end of parbox
-}% end of hbox
-}
-"
-                 ("\\chapter{%s}" . "\\chapter*{%s}")
-                 ("\\section{%s}" . "\\section*{%s}")
-                 ("\\subsection{%s}" . "\\subsection*{%s}")
-                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
-                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-
-  (setq org-latex-title-command "\\titleGM{%t}{%s}{%a}{%D} \\thispagestyle{empty} \\clearpage"))
-
+;;; ==================================== LaTeX / AucTeX ====================================
 
 ;; auctex options
 (setq preview-image-type 'dvipng
@@ -65,19 +8,19 @@
 (setq-default TeX-engine 'xetex)
 
 ;; math-preview options
-(defun custom-preview-marks (envs)
+(defun cosmic/custom-preview-marks (envs)
   (mapcan (lambda (env) (list (cons (concat "\\begin{" env "}") (concat "\\end{" env "}"))
                               (cons (concat "\\begin{" env "*}") (concat "\\end{" env "*}"))))
           envs))
 
 (use-package! math-preview
   :hook tex-mode
-  :commands (goat/math-preview)
+  :commands (cosmic/math-preview)
   :custom
   (math-preview-scale 3)
   (math-preview-raise 0.5)
   (math-preview-margin '(5 . 20))
-  (math-preview-marks (append (custom-preview-marks '("equation" "gather" "align"))
+  (math-preview-marks (append (cosmic/custom-preview-marks '("equation" "gather" "align"))
                               '(("\\[" . "\\]")
                                 ("\\(" . "\\)")
                                 ("$$" . "$$")
@@ -85,7 +28,7 @@
   (math-preview-preprocess-functions '((lambda (s)
                                          (replace-regexp-in-string "&" "" s))))
   :config
-  (defun goat/math-preview ()
+  (defun cosmic/math-preview ()
     "deals with auctex folding before activates math-preview-all"
     (interactive)
     (->> (math-preview--find-gaps (point-min) (point-max))
@@ -111,7 +54,7 @@
 
 (map! :map LaTeX-mode-map
       :localleader
-      :desc "Inline Preview" "p" #'goat/math-preview)
+      :desc "Inline Preview" "p" #'cosmic/math-preview)
 
 
 ;; Based on https://tecosaur.github.io/emacs-config/config.html

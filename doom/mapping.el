@@ -15,19 +15,5 @@
 ;;; =============================== Utility Bindings ==============================
 
 (map! :after banner-comment
-      :n "g <shift> c" #'banner-comment)
+      :n "g C" #'banner-comment)
 
-;; (map! :n "K" #'+lookup/documentation-new-window)
-
-
-
-;;; ============================ Language mode bindings ===========================
-
-(after! org
-  (setq evil-org-movement-bindings '((up . "<up>") (down . "<down>") (left . "<left>") (right . "<right>")))
-  (setq org-todo-keywords
-        '((sequence "TODO(!t/)" "IN PROGRESS(!p/)" "FINISHING UP(f)" "|" "DONE(!d/)")))
-  ;; (setq org-todo-keyword-faces
-  ;;       '(("IN PROGRESS" . (:foreground "yellow")))
-  ;; )
-  )
