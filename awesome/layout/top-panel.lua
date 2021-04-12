@@ -63,13 +63,18 @@ local top_panel = function(s, offset)
 
     panel:setup {
         layout = wibox.layout.align.horizontal,
-        expand = "none",
+        expand = "inside",
         {
             layout = wibox.layout.fixed.horizontal,
             task_list(s),
             add_button
         },
-        clock,
+        {
+            -- margins = dpi(5),
+            widget = wibox.widget.separator,
+            span_ratio = 0.975
+        },
+        -- clock,
         {
             layout = wibox.layout.fixed.horizontal,
             spacing = dpi(5),
