@@ -55,8 +55,10 @@
                    "blueman-applet"
                    ;; Music server
                    ;; "mpd"
-                   ;; Polkit and keyring
-                   (.. "/usr/lib/polkit-kde-authentication-agent-1 &" " eval $(gnome-keyring-daemon -s --componentspkcs11,secrets,ssh,gpg)")
+                   ;; Polkit
+                   "/usr/lib/polkit-kde-authentication-agent-1"
+                   ;; KeepassXC (with ssh-agent integration)
+                   "keepassxc"
                    ;; Load X colors
                    "xrdb $HOME/.Xresources"
                    ;; Audio equalizer
@@ -66,8 +68,7 @@
                    ;; You can add more start-up applications here
                    "xsetroot -cursor_name left_ptr"
                    "feh --bg-fill $HOME/Pictures/Wallpapers/rocket_girl.png"
-                   "copyq"
-                   ]
+                   "copyq"]
 ;; List of binaries/shell scripts that will execute for a certain task
 :utils {
         ;; Fullscreen screenshot
