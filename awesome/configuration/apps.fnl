@@ -29,10 +29,7 @@
            :bluetooth_manager  "blueman-manager"
            ;; Default power manager
            :power_manager  "xfce4-power-manager"
-           ;; Default GUI package manager
-           :package_manager  "pamac-manager"
            ;; Default locker
-           ;; :lock "awesome-client 'awesome.emit_signal(\'module::lockscreen_show\')'
 	       :lock  "dm-tool lock"
            ;; Default quake terminal
            :quake  "kitty --name QuakeTerminal"

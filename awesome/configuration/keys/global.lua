@@ -305,30 +305,6 @@ local global_keys =
     ),
     awful.key(
         {modkey},
-        "x",
-        function()
-            awesome.emit_signal("widget::blur:toggle")
-        end,
-        {description = "toggle blur effects", group = "Utility"}
-    ),
-    awful.key(
-        {modkey},
-        "]",
-        function()
-            awesome.emit_signal("widget::blur:increase")
-        end,
-        {description = "increase blur effect by 10%", group = "Utility"}
-    ),
-    awful.key(
-        {modkey},
-        "[",
-        function()
-            awesome.emit_signal("widget::blur:decrease")
-        end,
-        {description = "decrease blur effect by 10%", group = "Utility"}
-    ),
-    awful.key(
-        {modkey},
         "t",
         function()
             awesome.emit_signal("widget::blue_light:toggle")

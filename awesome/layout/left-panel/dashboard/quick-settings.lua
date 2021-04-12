@@ -38,9 +38,7 @@ return wibox.widget {
 			{
 				{
 					layout = wibox.layout.fixed.vertical,
-					-- require('widget.brightness-slider'),
 					require('widget.volume-slider'),
-					require('widget.airplane-mode'),
 					require('widget.bluetooth-toggle'),
 					require('widget.blue-light')
 				},
@@ -50,18 +48,18 @@ return wibox.widget {
 				end,
 				widget = wibox.container.background
 			},
-			{
-				{
-					layout = wibox.layout.fixed.vertical,
-					require('widget.blur-slider'),
-					require('widget.blur-toggle')
-				},
-				bg = beautiful.groups_bg,
-				shape = function(cr, width, height)
-					gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius) 
-				end,
-				widget = wibox.container.background
-			}
+			-- {
+			-- 	{
+			-- 		layout = wibox.layout.fixed.vertical,
+			-- 		require('widget.blur-slider'),
+			-- 		require('widget.blur-toggle')
+			-- 	},
+			-- 	bg = beautiful.groups_bg,
+			-- 	shape = function(cr, width, height)
+			-- 		gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
+			-- 	end,
+			-- 	widget = wibox.container.background
+			-- }
 		}
 	}
 }
