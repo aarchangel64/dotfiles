@@ -60,8 +60,36 @@ record_tbl.screen_rec_main_button = wibox.widget {
 	widget = wibox.container.margin
 }
 
+record_tbl.screen_rec_window_imgbox = wibox.widget {
+	image = widget_icon_dir .. 'audio.svg',
+	resize = true,
+	widget = wibox.widget.imagebox
+}
+
+record_tbl.screen_rec_window_button = wibox.widget {
+	{
+		nil,
+		{
+			{
+				record_tbl.screen_rec_window_imgbox,
+				margins = dpi(16),
+				widget = wibox.container.margin
+			},
+			widget = clickable_container
+		},
+		nil,
+		expand = 'none',
+		layout = wibox.layout.align.vertical
+	},
+	forced_width = dpi(60),
+	forced_height = dpi(60),
+	bg = beautiful.groups_bg,
+	shape =  gears.shape.circle,
+	widget = wibox.container.background
+}
+
 record_tbl.screen_rec_audio_imgbox = wibox.widget {
-	image = widget_icon_dir .. 'audio' .. '.svg',
+	image = widget_icon_dir .. 'audio.svg',
 	resize = true,
 	widget = wibox.widget.imagebox
 }
@@ -293,6 +321,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 				{
 					layout = wibox.layout.fixed.vertical,
 					record_tbl.screen_rec_countdown_txt,
+                    record_tbl.screen_rec_window_button,
 					{
 						layout = wibox.layout.align.horizontal,
 						record_tbl.screen_rec_settings_button,
