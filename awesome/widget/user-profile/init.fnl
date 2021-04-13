@@ -1,4 +1,6 @@
-(local awful (require :awful))
+(import-macros {: widget} :utilities.macros)
+
+(local spawn (require :awful.spawn))
 (local wibox (require :wibox))
 (local gears (require :gears))
 (local naughty (require :naughty))
@@ -11,88 +13,66 @@
 (local user-icon-dir :/var/lib/AccountsService/icons/)
 (local sys (require :utilities.system-info))
 
-(local profile-imagebox
-       (wibox.widget
-        { 1 {
-             :id :icon
-             :forced_height (dpi 45)
-             :forced_width (dpi 45)
-             :image (.. widget-icon-dir :default.svg)
-             :widget wibox.widget.imagebox
-             :resize true
-             :clip_shape (fn [cr width height] (gears.shape.rounded_rect cr width height beautiful.groups_radius))
-             }
-         :layout wibox.layout.align.horizontal
-         }))
-
-(local profile-name
-       (wibox.widget
-        {
-         :font "Inter Regular 10"
-         :markup (. (sys.info) :user)
-         :align :left
-         :valign :center
-         :widget wibox.widget.textbox
-         }))
-
-(local distro-name
-       (wibox.widget
-        {
-         :font "Inter Regular 10"
-         :markup (. (sys.info) :distro)
-         :align :left
-         :valign :center
-         :widget wibox.widget.textbox
-         }))
-
-(local kernel-version
-       (wibox.widget
-        {
-         :font "Inter Regular 10"
-         :markup (. (sys.info) :kernel)
-         :align :left
-         :valign :center
-         :widget wibox.widget.textbox
-         }))
+(let [profile-imagebox (widget (wibox.layout.align.horizontal)
+                               {:id :icon
+                                :forced_height (dpi 45)
+                                :forced_width (dpi 45)
+                                :image (.. widget-icon-dir :default.svg)
+                                :widget wibox.widget.imagebox
+                                :resize true
+                                :clip_shape #(gears.shape.rounded_rect $1 $2 $3
+                                                                       beautiful.groups_radius)})
+      profile-name (widget (wibox.widget)
+                           {:font "Inter Regular 10"
+                            :markup (. (sys.info) :user)
+                            :align :left
+                            :valign :center
+                            :widget wibox.widget.textbox})
+      distro-name (widget (wibox.widget)
+                          {:font "Inter Regular 10"
+                           :markup (. (sys.info) :distro)
+                           :align :left
+                           :valign :center
+                           :widget wibox.widget.textbox})
+      Kernel-version (widget wibox.widget
+                             {:font "Inter Regular 10"
+                              :markup (. (sys.info) :kernel)
+                              :align :left
+                              :valign :center
+                              :widget wibox.widget.textbox})])
 
 (local uptime-time
-       (wibox.widget
-        {
-         :font "Inter Regular 10"
-         :markup (. (sys.info) :uptime)
-         :align :left
-         :valign :center
-         :widget wibox.widget.textbox
-         }))
+       (wibox.widget {:font "Inter Regular 10"
+                      :markup (. (sys.info) :uptime)
+                      :align :left
+                      :valign :center
+                      :widget wibox.widget.textbox}))
 
 (fn update-profile-image []
-  (awful.spawn.easy_async_with_shell
-   apps.utils.update_profile
-   #(match (string.gsub $ "%\n" "")
-      "default"    (profile-imagebox.icon:set_image (.. widget-icon-dir :default.svg))
-      _            (profile-imagebox.icon:set_image $))))
+  (spawn.easy_async_with_shell apps.utils.update_profile
+                               #(match (string.gsub $ "%\n" "")
+                                  :default (profile-imagebox.icon:set_image (.. widget-icon-dir
+                                                                                :default.svg))
+                                  _ (profile-imagebox.icon:set_image $))))
 
 (update-profile-image)
 
 (local uptime-updater-timer
-       (gears.timer {
-                     :timeout 60
+       (gears.timer {:timeout 60
                      :autostart true
                      :call_now true
-                     :callback sys.update-uptime
-                     }))
+                     :callback sys.update-uptime}))
 
 ;; (fn a [widget prop val]
 ;;   (set (. widget prop) val))
 
-;; TODO: maybe use `each` with a table of (props, val) instead?
-(local user-profile
-       (doto (wibox.container.background)
-         (tset :bg beautiful.groups_bg)
-         (tset :shape #(gears.shape.rounded_rect $1 $2 $3 beautiful.groups_radius))
-         (tset :forced_height (dpi 92))
-         (tset :widget profile-imagebox)
-         ))
+(local user-profile (doto (wibox.container.background)
+                      (tset :bg beautiful.groups_bg)
+                      (tset :shape
+                            #(gears.shape.rounded_rect $1 $2 $3
+                                                       beautiful.groups_radius))
+                      (tset :forced_height (dpi 92))
+                      (tset :widget profile-imagebox)))
 
 ;; (wibox.widget
 ;;  { 1 {

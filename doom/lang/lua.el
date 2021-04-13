@@ -3,28 +3,35 @@
 ;;; ==================================== Fennel ===================================
 
 ;; Based on https://www.reddit.com/r/emacs/comments/dx4lsy/question_about_counsel_compile/
+
+(defvar cosmic/fennel-path "")
+(put 'cosmic/fennel-path 'safe-local-variable #'stringp)
+
 (defun cosmic/counsel-compile-fennel ()
-  (format "fennel --globals --add-package-path /usr/share/awesome/lib/*.lua --compile %1$s.fnl > %1$s.lua" (file-name-sans-extension (buffer-file-name))))
+  (format "fennel --lua lua5.3 --globals awesome,screen --add-package-path ';%1$s?.lua;%2$s?.lua' --add-fennel-path ';%1$s?.fnl;%2$s?.fnl' --compile %3$s.fnl > %3$s.lua"
+          (doom-project-root) cosmic/fennel-path (file-name-sans-extension (buffer-file-name))))
+
+(defun fennel-format ()
+  "Run fnlmfmt on the current buffer."
+  (interactive)
+  (shell-command-on-region (point-min) (point-max) "fnlfmt --indent-width 2 -" nil t))
 
 (use-package! fennel-mode
   :mode "\\.fnl\\'"
   ;; :bind (:map doom-leader-code-map
-  ;;        ("c" . +default/compile))
+  ;;        ("c" . +default/compile)
+  ;;        ("f" . fennel-format))
   :config
   (setq compilation-read-command nil)
-  (defun fennel-format ()
-    "Run fnlmfmt on the current buffer."
-    (interactive)
-    (shell-command-on-region (point-min) (point-max) "fnlfmt --indent-width 2 -" nil t))
   )
 
 (after! (mode-local fennel-mode)
   (setq-mode-local fennel-mode compile-command #'(cosmic/counsel-compile-fennel)))
 
 (map! :mode fennel-mode
-      :map doom-leader-code-map
-      "c" #'+default/compile
-      "f" #'fennel-format)
+      :leader
+      "c c" #'+default/compile
+      "c f" #'fennel-format)
 
 
 ;;; ===================================== Lua =====================================
