@@ -60,16 +60,14 @@
 (setq pdf-view-use-scaling t)
 
 ;; agressively indent in these modes
-(use-package! aggressive-indent
+(use-package! aggressive-indent-mode
   :hook
-  (
-   org-mode
+  (org-mode
    lua-mode
    fish-mode
    latex-mode
    fennel-mode
-   emacs-lisp-mode
-   ))
+   emacs-lisp-mode))
 
 
 ;;; =========================== LANGUAGE CONFIGURATIONS ===========================

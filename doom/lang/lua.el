@@ -4,7 +4,7 @@
 
 ;; Based on https://www.reddit.com/r/emacs/comments/dx4lsy/question_about_counsel_compile/
 (defun cosmic/counsel-compile-fennel ()
-  (format "fennel --compile %1$s.fnl > %1$s.lua" (file-name-sans-extension (buffer-file-name))))
+  (format "fennel --globals --add-package-path /usr/share/awesome/lib/*.lua --compile %1$s.fnl > %1$s.lua" (file-name-sans-extension (buffer-file-name))))
 
 (use-package! fennel-mode
   :mode "\\.fnl\\'"
@@ -12,6 +12,10 @@
   ;;        ("c" . +default/compile))
   :config
   (setq compilation-read-command nil)
+  (defun fennel-format ()
+    "Run fnlmfmt on the current buffer."
+    (interactive)
+    (shell-command-on-region (point-min) (point-max) "fnlfmt --indent-width 2 -" nil t))
   )
 
 (after! (mode-local fennel-mode)
@@ -19,7 +23,8 @@
 
 (map! :mode fennel-mode
       :map doom-leader-code-map
-      "c" #'+default/compile)
+      "c" #'+default/compile
+      "f" #'fennel-format)
 
 
 ;;; ===================================== Lua =====================================
