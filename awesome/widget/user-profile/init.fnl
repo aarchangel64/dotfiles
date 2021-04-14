@@ -1,4 +1,4 @@
-(import-macros {: widget} :utilities.macros)
+(import-macros {: apply : widget} :utilities.macros)
 
 (local spawn (require :awful.spawn))
 (local wibox (require :wibox))
@@ -13,104 +13,93 @@
 (local user-icon-dir :/var/lib/AccountsService/icons/)
 (local sys (require :utilities.system-info))
 
-(let [profile-imagebox (widget (wibox.layout.align.horizontal)
-                               {:id :icon
-                                :forced_height (dpi 45)
-                                :forced_width (dpi 45)
-                                :image (.. widget-icon-dir :default.svg)
-                                :widget wibox.widget.imagebox
-                                :resize true
-                                :clip_shape #(gears.shape.rounded_rect $1 $2 $3
-                                                                       beautiful.groups_radius)})
-      profile-name (widget (wibox.widget)
-                           {:font "Inter Regular 10"
-                            :markup (. (sys.info) :user)
-                            :align :left
-                            :valign :center
-                            :widget wibox.widget.textbox})
-      distro-name (widget (wibox.widget)
-                          {:font "Inter Regular 10"
-                           :markup (. (sys.info) :distro)
-                           :align :left
-                           :valign :center
-                           :widget wibox.widget.textbox})
-      Kernel-version (widget wibox.widget
-                             {:font "Inter Regular 10"
-                              :markup (. (sys.info) :kernel)
-                              :align :left
-                              :valign :center
-                              :widget wibox.widget.textbox})])
-
-(local uptime-time
-       (wibox.widget {:font "Inter Regular 10"
-                      :markup (. (sys.info) :uptime)
-                      :align :left
-                      :valign :center
-                      :widget wibox.widget.textbox}))
-
-(fn update-profile-image []
-  (spawn.easy_async_with_shell apps.utils.update_profile
-                               #(match (string.gsub $ "%\n" "")
-                                  :default (profile-imagebox.icon:set_image (.. widget-icon-dir
-                                                                                :default.svg))
-                                  _ (profile-imagebox.icon:set_image $))))
-
-(update-profile-image)
-
 (local uptime-updater-timer
        (gears.timer {:timeout 60
                      :autostart true
                      :call_now true
                      :callback sys.update-uptime}))
 
-;; (fn a [widget prop val]
-;;   (set (. widget prop) val))
+(let [user-pic
+      (widget (wibox.widget.imagebox)
+              {:forced_height (dpi 45)
+               :forced_width (dpi 45)
+               :image (.. widget-icon-dir :default.svg)
+               :resize true
+               :clip_shape #(gears.shape.rounded_rect $1 $2 $3 beautiful.groups_radius)})
+      align-image
+      (widget (wibox.layout.align.vertical) {:expand :none})]
 
-(local user-profile (doto (wibox.container.background)
-                      (tset :bg beautiful.groups_bg)
-                      (tset :shape
-                            #(gears.shape.rounded_rect $1 $2 $3
-                                                       beautiful.groups_radius))
-                      (tset :forced_height (dpi 92))
-                      (tset :widget profile-imagebox)))
+  (align-image:set_middle user-pic)
 
-;; (wibox.widget
-;;  { 1 {
-;;       1 {
-;;          :layout wibox.layout.fixed.horizontal
-;;          :spacing (dpi 10)
-;;          3 {
-;;             :layout wibox.layout.align.vertical
-;;             :expand :none
-;;             3 nil
-;;             4 profile-imagebox
-;;             5 nil
-;;             }
-;;          4 {
-;;             :layout wibox.layout.align.vertical
-;;             :expand :none
-;;             3 nil
-;;             4 {
-;;                :layout wibox.layout.fixed.vertical
-;;                2 profile-name
-;;                3 distro-name
-;;                4 kernel-version
-;;                5 uptime-time
-;;                }
-;;             5 nil
-;;             }
-;;          }
-;;       :margins (dpi 10)
-;;       :widget wibox.container.margin
-;;       }
-;;   :forced_height (dpi 92)
-;;   :bg beautiful.groups_bg
-;;   :shape #(gears.shape.rounded_rect $1 $2 $3 beautiful.groups_radius)
-;;   :widget wibox.container.background
-;;   }))
+  (let [user-name
+        (widget (wibox.widget.textbox)
+                {:font "Inter Regular 10"
+                 :markup (. (sys.info) :user)
+                 :align :left
+                 :valign :center})
+        distro-name
+        (widget (wibox.widget.textbox)
+                {:font "Inter Regular 10"
+                 :markup (. (sys.info) :distro)
+                 :align :left
+                 :valign :center})
+        kernel-version
+        (widget (wibox.widget.textbox)
+                {:font "Inter Regular 10"
+                 :markup (. (sys.info) :kernel)
+                 :align :left
+                 :valign :center})
+        uptime-time
+        (widget (wibox.widget.textbox)
+                {:font "Inter Regular 10"
+                 :markup (. (sys.info) :uptime)
+                 :align :left
+                 :valign :center})
 
-(user-profile:connect_signal "mouse::enter" ;; sys.update-uptime
-                             (fn test []
-                               (gears.debug.dump (sys.info))))
+        vert-info
+        (widget (wibox.layout.fixed.vertical) {})
 
-user-profile
+        horizon-layout
+        (widget (wibox.layout.fixed.horizontal) {:spacing (dpi 10)})
+        ]
+
+    (vert-info:add user-name)
+    (vert-info:add distro-name)
+    (vert-info:add kernel-version)
+    (vert-info:add uptime-time)
+
+    (horizon-layout:add align-image)
+    (horizon-layout:add vert-info)
+
+    (let [margin
+          (widget (wibox.container.margin)
+                  {:margins (dpi 10)
+                   :widget horizon-layout})]
+
+      (let [user-profile
+            (widget (wibox.container.background)
+                    {:bg beautiful.groups_bg
+                     :shape #(gears.shape.rounded_rect $1 $2 $3 beautiful.groups_radius)
+                     :forced_height (dpi 92)
+                     :widget margin})]
+
+        (fn update-profile-image []
+          (spawn.easy_async_with_shell apps.utils.update_profile
+                                       #(match (string.gsub $ "%\n" "")
+                                          :default (tset user-pic :image (.. widget-icon-dir :default.svg))
+                                          _ (tset user-pic :image $))))
+
+        (update-profile-image)
+
+        (user-profile:connect_signal "mouse::enter" ;; sys.update-uptime
+                                     (fn test []
+                                       (gears.debug.dump (sys.info))))
+        user-profile))))
+
+;; (local user-profile (doto (wibox.container.background)
+;;                       (tset :bg beautiful.groups_bg)
+;;                       (tset :shape
+;;                             #(gears.shape.rounded_rect $1 $2 $3
+;;                                                        beautiful.groups_radius))
+;;                       (tset :forced_height (dpi 92))
+;;                       (tset :widget _G.profile-imagebox)))
