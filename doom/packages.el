@@ -7,6 +7,7 @@
 (package! banner-comment)
 (package! pkgbuild-mode)
 (package! platformio-mode)
+(package! sphinx-doc)
 
 (package! lsp-julia :recipe (:host github :repo "non-jedi/lsp-julia"))
 (package! fennel-mode :recipe (:host gitlab :repo "technomancy/fennel-mode"))

@@ -28,7 +28,7 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type 'visual)
+(setq display-line-numbers-type 'relative)
 
 ;; Set title frame to show current buffer name, save state, and project
 (setq frame-title-format
@@ -60,7 +60,7 @@
 (setq pdf-view-use-scaling t)
 
 ;; agressively indent in these modes
-(use-package! aggressive-indent
+(use-package! aggressive-indent-mode
   :hook
   (
    org-mode
@@ -68,6 +68,7 @@
    fish-mode
    latex-mode
    fennel-mode
+   python-mode
    emacs-lisp-mode
    ))
 
@@ -79,8 +80,9 @@
 (load! "lang/fish")
 (load! "lang/rust")
 (load! "lang/latex")
+(load! "lang/julia")
+(load! "lang/python")
 (load! "lang/pkgbuild")
-
 
 ;;; =============================== OTHER CONFIGS ==============================
 ;; (load! "project")

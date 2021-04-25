@@ -17,7 +17,7 @@
   :hook tex-mode
   :commands (cosmic/math-preview)
   :custom
-  (math-preview-scale 3)
+  (math-preview-scale 1)
   (math-preview-raise 0.5)
   (math-preview-margin '(5 . 20))
   (math-preview-marks (append (cosmic/custom-preview-marks '("equation" "gather" "align"))
@@ -39,9 +39,9 @@
                (TeX-fold-clearout-region (car it) (cdr it))
                (math-preview--submit (car it) (cdr it)
                                      (math-preview--strip-marks
-                                      (buffer-substring (car it) (cdr it))))))))
+                                      (buffer-substring (car it) (cdr it)))))))))
   ;; (math-preview-all)
-  )
+  
 
 ;; (after! math-preview
 
@@ -54,7 +54,9 @@
 
 (map! :map LaTeX-mode-map
       :localleader
-      :desc "Inline Preview" "p" #'cosmic/math-preview)
+      :desc "Inline Preview" "p" #'cosmic/math-preview
+      :desc "Compile LaTeX" "c" #'TeX-command-run-all
+      :desc "View PDF" "v" #'TeX-view)
 
 
 ;; Based on https://tecosaur.github.io/emacs-config/config.html
@@ -83,7 +85,8 @@
      ;; now just conveniance
      (?. ("\\cdot" "\\dots"))
      (?: ("\\vdots" "\\ddots"))
-     (?* ("\\times" "\\star" "\\ast"))))
+     (?* ("\\times" "\\star" "\\ast"))
+     (?I ("\\implies" "\\Im"))))
   (cdlatex-math-modify-alist
    '(;;my own stuff
      (?B "\\mathbb" nil t nil nil)
@@ -155,7 +158,8 @@
         ("[1]:||►" ("item"))
         ("❡❡ {1}" ("part" "part*"))
         ("❡ {1}" ("chapter" "chapter*"))
-        ("§ {1}" ("section" "section*"))
+        ;; ("§ {1}" ("section" "section*"))
+        (cosmic/test ("section" "section*"))
         ("§§ {1}" ("subsection" "subsection*"))
         ("§§§ {1}" ("subsubsection" "subsubsection*"))
         ("¶ {1}" ("paragraph" "paragraph*"))
@@ -163,6 +167,12 @@
         ;; extra
         ("｢{1}" ("begin"))
         ("{1}｣" ("end"))))
+(defun cosmic/test (input)
+ (progn
+   (message input)
+   (concat "test" " 2 " input)))
+  
+  
 (defun string-offset-roman-chars (offset word)
   "Shift the codepoint of each charachter in WORD by OFFSET with an extra -6 shift if the letter is lowercase"
   (apply 'string
@@ -199,8 +209,8 @@
     (120135 . 8473)                     ; ℙ
     (120136 . 8474)                     ; ℚ
     (120137 . 8477)                     ; ℝ
-    (120145 . 8484)                     ; ℤ
-    )
+    (120145 . 8484))                     ; ℤ
+    
   "An alist of deceptive codepoints, and then where the glyph actually resides.")
 (defun string-offset-apply-roman-char-exceptions (char)
   "Sometimes the codepoint doesn't contain the char you expect.
