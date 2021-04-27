@@ -1,0 +1,85 @@
+# add_newline = false
+
+format = """
+[╭─ ](yellow)\
+$username\
+$hostname\
+$shlvl\
+$kubernetes\
+$directory\
+$vcsh\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$hg_branch\
+$docker_context\
+$package\
+$cmake\
+$dart\
+$deno\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$golang\
+$helm\
+$java\
+$julia\
+$kotlin\
+$nim\
+$nodejs\
+$ocaml\
+$perl\
+$php\
+$purescript\
+$python\
+$red\
+$ruby\
+$rust\
+$scala\
+$swift\
+$terraform\
+$vagrant\
+$zig\
+$nix_shell\
+$conda\
+$lua\
+$memory_usage\
+$aws\
+$gcloud\
+$openstack\
+$env_var\
+$crystal\
+$custom\
+$line_break\
+$jobs\
+$status\
+$time\
+$shell\
+$cmd_duration\
+$line_break\
+$character
+"""
+
+[character]
+format = "[╰─](yellow)$symbol "
+
+[directory]
+fish_style_pwd_dir_length=1
+style = "bold bright-green"
+
+[cmd_duration]
+style = "blue"
+format = '\([$duration]($style)\) '
+
+[status]
+format = '[\[$status\]: $common_meaning]($style) '
+disabled = false
+
+[memory_usage]
+disabled = false
+
+[gcloud]
+disabled = true
+symbol = '🇬️  '

@@ -23,6 +23,9 @@
     ~/.config/picom.conf:
     ~/.config/nvim:
     ~/.config/clangd:
+    ~/.config/ion:
+    ~/.config/starship.toml:
+    ~/.config/starship-right.toml:
 
     ~/.config/GIMP/2.10:
       path: GIMP/2.10/*

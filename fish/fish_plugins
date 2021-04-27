@@ -5,3 +5,5 @@ PatrickF1/fzf.fish
 jhillyerd/plugin-git
 lwolfsonkin/fish-jupyter-completions
 jorgebucaran/getopts.fish
+oh-my-fish/plugin-thefuck
+edc/bass
