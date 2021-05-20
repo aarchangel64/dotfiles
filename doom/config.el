@@ -19,8 +19,8 @@
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
 
-(setq doom-font "Iosevka SS07-12"
-      doom-variable-pitch-font "Iosevka Aile-12")
+(setq doom-font "Iosevka Cosmic-12"
+      doom-variable-pitch-font "Iosevka Cosmic Aile-12")
 
 ;; Default: 'doom-one'
 ;; My favourites: doom-henna, doom-horizon, doom-challenger-deep
@@ -29,6 +29,9 @@
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'relative)
+
+;; Disable exit confirmation
+(setq confirm-kill-emacs nil)
 
 ;; Set title frame to show current buffer name, save state, and project
 (setq frame-title-format
@@ -58,6 +61,7 @@
 
 ;; Make PDFs (and SVGs?) look nicer (mayyybe)
 (setq pdf-view-use-scaling t)
+;; (pgtk-set-monitor-scale-factor "DP-2" 1.0)
 
 ;; agressively indent in these modes
 (use-package! aggressive-indent-mode
@@ -65,12 +69,11 @@
   (
    org-mode
    lua-mode
-   fish-mode
    latex-mode
    fennel-mode
    python-mode
-   emacs-lisp-mode
-   ))
+   emacs-lisp-mode))
+   
 
 
 ;;; =========================== LANGUAGE CONFIGURATIONS ===========================

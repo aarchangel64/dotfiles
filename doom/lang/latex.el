@@ -7,41 +7,46 @@
       TeX-fold-type-list '(env macro math))
 (setq-default TeX-engine 'xetex)
 
-;; math-preview options
-(defun cosmic/custom-preview-marks (envs)
-  (mapcan (lambda (env) (list (cons (concat "\\begin{" env "}") (concat "\\end{" env "}"))
-                              (cons (concat "\\begin{" env "*}") (concat "\\end{" env "*}"))))
-          envs))
-
-(use-package! math-preview
-  :hook tex-mode
-  :commands (cosmic/math-preview)
-  :custom
-  (math-preview-scale 1)
-  (math-preview-raise 0.5)
-  (math-preview-margin '(5 . 20))
-  (math-preview-marks (append (cosmic/custom-preview-marks '("equation" "gather" "align"))
-                              '(("\\[" . "\\]")
-                                ("\\(" . "\\)")
-                                ("$$" . "$$")
-                                ("$" . "$"))))
-  (math-preview-preprocess-functions '((lambda (s)
-                                         (replace-regexp-in-string "&" "" s))))
+(use-package! preview
   :config
-  (defun cosmic/math-preview ()
-    "deals with auctex folding before activates math-preview-all"
-    (interactive)
-    (->> (math-preview--find-gaps (point-min) (point-max))
-      (--map (math-preview--search (car it) (cdr it)))
-      (-flatten)
-      (--map (progn
-               (message "test %s %s" (car it) (cdr it))
-               (TeX-fold-clearout-region (car it) (cdr it))
-               (math-preview--submit (car it) (cdr it)
-                                     (math-preview--strip-marks
-                                      (buffer-substring (car it) (cdr it)))))))))
-  ;; (math-preview-all)
-  
+  (set-default 'preview-scale-function 2.0))
+
+;;; NOTE: Disable math-preview since auctex preview isn't blurry anymore
+;; math-preview options
+;; (defun cosmic/custom-preview-marks (envs)
+;;   (mapcan (lambda (env) (list (cons (concat "\\begin{" env "}") (concat "\\end{" env "}"))
+;;                               (cons (concat "\\begin{" env "*}") (concat "\\end{" env "*}"))))
+;;           envs))
+
+;; (use-package! math-preview
+;;   :hook tex-mode
+;;   :commands (cosmic/math-preview)
+;;   :custom
+;;   (math-preview-scale 1)
+;;   (math-preview-raise 0.5)
+;;   (math-preview-margin '(5 . 20))
+;;   (math-preview-marks (append (cosmic/custom-preview-marks '("equation" "gather" "align"))
+;;                               '(("\\[" . "\\]")
+;;                                 ("\\(" . "\\)")
+;;                                 ("$$" . "$$")
+;;                                 ("$" . "$"))))
+;;   (math-preview-preprocess-functions '((lambda (s)
+;;                                          (replace-regexp-in-string "&" "" s))))
+;;   :config
+;;   (defun cosmic/math-preview ()
+;;     "deals with auctex folding before activates math-preview-all"
+;;     (interactive)
+;;     (->> (math-preview--find-gaps (point-min) (point-max))
+;;       (--map (math-preview--search (car it) (cdr it)))
+;;       (-flatten)
+;;       (--map (progn
+;;                (message "test %s %s" (car it) (cdr it))
+;;                (TeX-fold-clearout-region (car it) (cdr it))
+;;                (math-preview--submit (car it) (cdr it)
+;;                                      (math-preview--strip-marks
+;;                                       (buffer-substring (car it) (cdr it)))))))))
+;;   ;; (math-preview-all)
+
 
 ;; (after! math-preview
 
@@ -54,7 +59,8 @@
 
 (map! :map LaTeX-mode-map
       :localleader
-      :desc "Inline Preview" "p" #'cosmic/math-preview
+      ;; :desc "Inline Preview" "p" #'cosmic/math-preview
+      :desc "Fold Entire Buffer" "f" #'TeX-fold-buffer
       :desc "Compile LaTeX" "c" #'TeX-command-run-all
       :desc "View PDF" "v" #'TeX-view)
 
@@ -118,9 +124,9 @@
         ("𝑑" ("dd"))
         ;; known commands
         ("" ("phantom"))
-        (,(lambda (num den) (if (and (TeX-string-single-token-p num) (TeX-string-single-token-p den))
-                                (concat num "／" den)
-                              (concat "❪" num "／" den "❫"))) ("frac"))
+        (,(lambda (num den) (if (and (TeX-string-single-token-p num) (TeX-string-single-token-p den)))
+            (concat num "／" den)
+            (concat "❪" num "／" den "❫"))) ("frac")
         (,(lambda (arg) (concat "√" (TeX-fold-parenthesize-as-neccesary arg))) ("sqrt"))
         (,(lambda (arg) (concat "⭡" (TeX-fold-parenthesize-as-neccesary arg))) ("vec"))
         ("‘{1}’" ("text"))
@@ -130,8 +136,11 @@
         ("⌊{1}⌋" ("floor"))
         ("⌈{1}⌉" ("ceil"))
         ("⌊{1}⌉" ("round"))
-        ("𝑑{1}/𝑑{2}" ("dv"))
+        ("𝑑{1}/𝑑{2}" ("odv"))
         ("∂{1}/∂{2}" ("pdv"))
+        ;; brackets
+        ("[[1]" ("left["))
+        ("]" ("right]"))
         ;; fancification
         ("{1}" ("mathrm"))
         (,(lambda (word) (string-offset-roman-chars 119743 word)) ("mathbf"))
@@ -158,8 +167,8 @@
         ("[1]:||►" ("item"))
         ("❡❡ {1}" ("part" "part*"))
         ("❡ {1}" ("chapter" "chapter*"))
-        ;; ("§ {1}" ("section" "section*"))
-        (cosmic/test ("section" "section*"))
+        ("§ {1}" ("section" "section*"))
+        ;; (cosmic/test ("section" "section*"))
         ("§§ {1}" ("subsection" "subsection*"))
         ("§§§ {1}" ("subsubsection" "subsubsection*"))
         ("¶ {1}" ("paragraph" "paragraph*"))

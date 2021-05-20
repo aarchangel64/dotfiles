@@ -12,7 +12,10 @@
 ;;      flags as well (those symbols that start with a plus).
 ;;
 ;;      Alternatively, press 'gd' (or 'C-c c d') on a module to browse its
-;;      directory (for easy access to its source code).
+;;      directory (for easy access to its source
+
+;; NOTE From https://github.com/hlissner/doom-emacs/issues/2447
+(setq evil-respect-visual-line-mode nil)
 
 (doom! :input
        ;;chinese
@@ -29,14 +32,14 @@
        ;;deft                ; notational velocity for Emacs
        doom                  ; what makes DOOM look the way it does
        doom-dashboard        ; a nifty splash screen for Emacs
-       ;; doom-quit             ; DOOM quit-message prompts when you quit Emacs
+       doom-quit             ; DOOM quit-message prompts when you quit Emacs
        (emoji                ; 🙂
         +unicode)
        ;; fill-column        ; a `fill-column' indicator
        hl-todo               ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        ;;hydra
        indent-guides         ; highlighted indent columns
-       (ligatures +extra) ; ligatures and symbols to make your code pretty again
+       ;; (ligatures +iosevka) ; ligatures and symbols to make your code pretty again
        ;;minimap             ; show a map of the code on the side
        modeline              ; snazzy, Atom-inspired modeline, plus API
 

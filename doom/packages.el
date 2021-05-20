@@ -2,7 +2,7 @@
 ;;; $DOOMDIR/packages.el
 
 (package! aggressive-indent)
-(package! math-preview)
+;; (package! math-preview)
 (package! ialign)
 (package! banner-comment)
 (package! pkgbuild-mode)
