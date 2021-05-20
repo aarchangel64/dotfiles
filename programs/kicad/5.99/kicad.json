@@ -1,7 +1,7 @@
 {
   "appearance": {
     "color_theme": "_builtin_default",
-    "left_frame_width": 250
+    "left_frame_width": 410
   },
   "color_picker": {
     "default_tab": 0
@@ -41,6 +41,7 @@
   },
   "system": {
     "file_history": [
+      "/home/cosmicdoge/Development/track-o-tron/wiring-schematic/wiring-schematic.kicad_pro",
       "/mnt/data/Documents/NYU/EG1003/track-o-tron/platformio/wiring-schematic/wiring-schematic.kicad_pro",
       "/mnt/data/Documents/NYU/EG1003/track-o-tron/platformio/wiring-schematic/wiring-schematic.pro"
     ],
@@ -49,7 +50,7 @@
     "last_metric_units": 1,
     "max_undo_items": 0,
     "open_projects": [
-      "/mnt/data/Documents/NYU/EG1003/track-o-tron/platformio/wiring-schematic/wiring-schematic.kicad_pro"
+      "/home/cosmicdoge/Development/track-o-tron/wiring-schematic/wiring-schematic.kicad_pro"
     ],
     "units": 1
   },
@@ -97,8 +98,8 @@
       "user_grid_y": "10 mil"
     },
     "maximized": false,
-    "mru_path": "/mnt/data/Documents/NYU/EG1003/track-o-tron/platformio/wiring-schematic/",
-    "perspective": "layout2|name=MainToolbar;caption=;state=139644;dir=4;layer=2;row=0;pos=0;prop=100000;bestw=34;besth=227;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=ProjectTree;caption=Project Files;state=2044;dir=4;layer=1;row=0;pos=0;prop=100000;bestw=250;besth=-1;minw=250;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=Launcher;caption=Editors;state=508;dir=5;layer=0;row=0;pos=0;prop=100000;bestw=657;besth=518;minw=657;minh=518;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|dock_size(4,2,0)=34|dock_size(4,1,0)=252|dock_size(5,0,0)=657|",
+    "mru_path": "/home/cosmicdoge/Development/track-o-tron/wiring-schematic/",
+    "perspective": "layout2|name=MainToolbar;caption=;state=139644;dir=4;layer=2;row=0;pos=0;prop=100000;bestw=34;besth=227;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=ProjectTree;caption=Project Files;state=2044;dir=4;layer=1;row=0;pos=0;prop=100000;bestw=250;besth=-1;minw=250;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=Launcher;caption=Editors;state=508;dir=5;layer=0;row=0;pos=0;prop=100000;bestw=657;besth=518;minw=657;minh=518;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|dock_size(4,2,0)=34|dock_size(4,1,0)=412|dock_size(5,0,0)=657|",
     "pos_x": 861,
     "pos_y": 214,
     "size_x": 1837,

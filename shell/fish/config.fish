@@ -12,3 +12,5 @@ set -gx STARSHIP_SESSION_KEY (random 10000000000000 9999999999999999)
 # starship init fish | source
 source /etc/grc.fish
 # set -x string split ' ' -f2 (alias) | string join ','
+set -gx VOLTA_HOME "$HOME/.volta"
+set -gx PATH "$VOLTA_HOME/bin" $PATH

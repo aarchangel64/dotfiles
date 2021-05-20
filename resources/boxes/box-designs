@@ -1,0 +1,29 @@
+PARENT /etc/boxes-config
+
+
+BOX square-brackets
+
+author   "Shrey Pasricha <shrey.pasricha@gmail.com>"
+designer "Shrey Pasricha <shrey.pasricha@gmail.com>"
+revision "1.0"
+tags     "simple, artwork, box"
+
+sample
+	┌                 ┐
+	│ square-brackets │
+	└                 ┘
+ends
+
+shapes {
+    nw ("┌") n (" ") ne ("┐")
+     w ("│")          e ("│")
+    sw ("└") s (" ") se ("┘")
+}
+
+padding {
+    horiz 1
+}
+
+elastic (n,e,s,w)
+
+END square-brackets

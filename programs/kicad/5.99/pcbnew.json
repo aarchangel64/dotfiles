@@ -241,6 +241,7 @@
     "footprint_text_fill": true,
     "graphic_items_fill": true,
     "graphics_fill": true,
+    "live_3d_refresh": false,
     "max_links_shown": 3,
     "net_names_mode": 3,
     "origin_invert_x_axis": false,

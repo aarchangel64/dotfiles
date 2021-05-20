@@ -1,0 +1,5 @@
+Xft.dpi: 192 
+Xcursor.theme: nier_cursors
+Xcursor.size: 48
+
+#include "/home/cosmicdoge/.dotfiles/resources/xcolours/henna"

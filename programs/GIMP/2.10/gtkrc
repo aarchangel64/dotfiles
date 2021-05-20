@@ -1,0 +1,10 @@
+# Set font
+style "Inter"
+{
+    font_name       = "Inter 12"
+    text[NORMAL]    = "#ffffff"
+    # text[PRELIGHT]  = "#ffffff"
+    # text[ACTIVE]    = "#ffffff"
+}
+widget_class "*" style "Inter"
+gtk-font-name = "Inter 12"

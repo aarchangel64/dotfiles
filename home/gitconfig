@@ -1,0 +1,21 @@
+[init]
+	defaultBranch = master
+[user]
+	name = Shrey Pasricha
+	email = shrey.pasricha@gmail.com
+[pull]
+	rebase = false
+[core]
+	excludesfile = /home/cosmicdoge/.gitignore_global
+	autocrlf = input
+
+[diff]
+    tool = kitty
+    guitool = kitty.gui
+[difftool]
+    prompt = false
+    trustExitCode = true
+[difftool "kitty"]
+    cmd = kitty +kitten diff $LOCAL $REMOTE
+[difftool "kitty.gui"]
+    cmd = kitty kitty +kitten diff $LOCAL $REMOTE

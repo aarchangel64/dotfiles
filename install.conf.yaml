@@ -9,36 +9,24 @@
       recursive: true
 
 - link:
-    ~/.gitconfig:
-    ~/.tmux.conf:
-    ~/.Xresources:
-    ~/.xprofile:
-    ~/.ideavimrc:
-    ~/.config/awesome:
-    ~/.config/kitty:
-    ~/.config/qmk:
-    ~/.config/doom:
-    ~/.config/pulse:
-    ~/.config/chemacs:
-    ~/.config/picom.conf:
-    ~/.config/nvim:
-    ~/.config/clangd:
-    ~/.config/ion:
-    ~/.config/starship.toml:
-    ~/.config/starship-right.toml:
-
-    ~/.config/GIMP/2.10:
-      path: GIMP/2.10/*
+    ~/:
       glob: true
+      path: home/*
+      prefix: '.'
 
-    ~/.config/kicad/5.99:
-      path: kicad/5.99/*
+    ~/.config/:
       glob: true
+      path: config/**
 
-    ~/.config/fish/functions:
-      path: fish/functions/*.fish
+    ~/.config/:
       glob: true
+      path: programs/**
 
     ~/.config/fish/:
-      path: fish/*
+      path: shell/fish/**
       glob: true
+
+    ~/.config/awesome:
+    ~/.config/boxes: resources/boxes
+    ~/.config/doom:
+    ~/.config/starship.toml: shell/starship.toml
