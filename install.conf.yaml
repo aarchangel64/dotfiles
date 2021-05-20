@@ -18,10 +18,6 @@
       glob: true
       path: config/**
 
-    ~/.config/:
-      glob: true
-      path: programs/**
-
     ~/.config/fish/:
       path: shell/fish/**
       glob: true
