@@ -1,12 +1,12 @@
 # Cosmic Dotfiles
-![Neofetch Screenshot](images/neofetch.png)
+![Neofetch Screenshot](resources/images/neofetch.png)
 _Dot all the files! - *DOT*_
 
 This is my personal dotfiles configuration, welcome aboard!
 
 ## What I Use:
 ### OS
-- A custom tweaked linux kernel
+- Xanmod Linux Kernel
 - i use arch btw
 
 ### Desktop Environment
@@ -20,13 +20,13 @@ This is my personal dotfiles configuration, welcome aboard!
 - **Terminal Editor:** [Neovim](https://neovim.io)
 
 ### Terminal
-![Fish Greeting](images/fish-greeting.png)
+![Fish Greeting](resources/images/fish-greeting.png)
 
 - **Terminal Emulator:** [Kitty](https://sw.kovidgoyal.net/kitty/)
 - **Shell:** [Fish](https://fishshell.com)
     - _You can thank my friend [Brian](https://github.com/fdeitylink) for making me a fisher 🐟_
 
-![Fish Shell](images/fish-shell.png)
+![Fish Shell](resources/images/fish-shell.png)
 
 ### Other Tools
 - [Exa](https://the.exa.website): a modern replacement for ls
