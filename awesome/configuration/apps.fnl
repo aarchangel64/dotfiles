@@ -45,37 +45,39 @@
            :rofi_appmenu  (.. "rofi -dpi " screen.primary.dpi " -show drun -theme " config_dir "/configuration/rofi/appmenu/rofi.rasi" )
            }
 
-;; You can add more default applications here
-;; List of apps to start once on start-up
+ ;; You can add more default applications here
+ ;; List of apps to start once on start-up
 
-:run_on_start_up  [
-                   ;; Compositor
-                   "picom -b --experimental-backends --dbus"
-                   ;; Blueman applet
-                   "blueman-applet"
-                   ;; Music server
-                   ;; "mpd"
-                   ;; Polkit
-                   "/usr/lib/polkit-kde-authentication-agent-1"
-                   ;; KeepassXC (with ssh-agent integration)
-                   "keepassxc"
-                   ;; Load X colors
-                   "xrdb $HOME/.Xresources"
-                   ;; Audio equalizer
-                   ;; 'pulseeffects --gapplication-service'
-                   ;; Lockscreen timer
-                   ;; "xidlehook --not-when-fullscreen --not-when-audio --timer 600 awesome-client 'awesome.emit_signal(\"module::lockscreen_show\")'"
-                   ;; You can add more start-up applications here
-                   "xsetroot -cursor_name left_ptr"
-                   "feh --bg-fill $HOME/Pictures/Wallpapers/rocket_girl.png"
-                   "copyq"]
-;; List of binaries/shell scripts that will execute for a certain task
-:utils {
-        ;; Fullscreen screenshot
-        :full_screenshot (.. utils_dir "snap full" )
-        ;; Area screenshot
-        :area_screenshot (.. utils_dir "snap area" )
-        ;; Update profile picture
-        :update_profile  (.. utils_dir "profile-image" )
-        }
+ :run_on_start_up  [
+                    ;; Compositor
+                    "picom -b --experimental-backends --dbus"
+                    ;; Blueman applet
+                    "blueman-applet"
+                    ;; Music server
+                    ;; "mpd"
+                    ;; Polkit
+                    "/usr/lib/polkit-kde-authentication-agent-1"
+                    ;; KeepassXC (with ssh-agent integration)
+                    "keepassxc"
+                    ;; Load X colors
+                    "xrdb $HOME/.Xresources"
+                    ;; Audio equalizer
+                    ;; 'pulseeffects --gapplication-service'
+                    ;; Lockscreen timer
+                    ;; "xidlehook --not-when-fullscreen --not-when-audio --timer 600 awesome-client 'awesome.emit_signal(\"module::lockscreen_show\")'"
+                    ;; You can add more start-up applications here
+                    "xsetroot -cursor_name left_ptr"
+                    "feh --bg-fill $HOME/Pictures/Wallpapers/lofi_cafe.jpg"
+                    "copyq"
+                    "udiskie -t"
+                    ]
+ ;; List of binaries/shell scripts that will execute for a certain task
+ :utils {
+         ;; Fullscreen screenshot
+         :full_screenshot (.. utils_dir "snap full" )
+         ;; Area screenshot
+         :area_screenshot (.. utils_dir "snap area" )
+         ;; Update profile picture
+         :update_profile  (.. utils_dir "profile-image" )
+         }
  }
