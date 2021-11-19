@@ -147,10 +147,12 @@ common.InteractiveEdit.measureTool	Ctrl+Shift+M
 common.InteractivePicker.pickerTool	
 common.InteractiveSelection.selectionTool	
 common.SuiteControl.configurePaths	
+common.SuiteControl.donate	
 common.SuiteControl.getInvolved	
 common.SuiteControl.gettingStarted	
 common.SuiteControl.help	
 common.SuiteControl.listHotKeys	Ctrl+F1
+common.SuiteControl.openPreferences	Ctrl+,
 common.SuiteControl.reportBug	
 common.SuiteControl.showFootprintLibTable	
 common.SuiteControl.showSymbolLibTable	
@@ -179,6 +181,7 @@ eeschema.EditorControl.showBusManager
 eeschema.EditorControl.showHiddenFields	
 eeschema.EditorControl.showHiddenPins	
 eeschema.EditorControl.showPcbNew	
+eeschema.EditorControl.showPythonConsole	
 eeschema.EditorControl.updateNetHighlighting	
 eeschema.InspectionTool.checkSymbol	
 eeschema.InspectionTool.runERC	

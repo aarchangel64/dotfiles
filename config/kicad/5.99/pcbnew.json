@@ -53,7 +53,9 @@
     "origin_mode": 0,
     "origin_units": 0,
     "origin_x": 0.0,
-    "origin_y": 0.0
+    "origin_y": 0.0,
+    "overwrite_file": true,
+    "replace_models": false
   },
   "export_svg": {
     "black_and_white": false,
@@ -252,7 +254,7 @@
     "pad_numbers": true,
     "ratsnest_curved": false,
     "ratsnest_footprint": true,
-    "ratsnest_global": false,
+    "ratsnest_global": true,
     "rotation_angle": 900,
     "text_fill": true,
     "track_clearance_mode": 2,
@@ -264,7 +266,8 @@
     "file_format": 0,
     "file_options": 0,
     "include_board_edge": false,
-    "units": 1
+    "units": 1,
+    "use_place_file_origin": true
   },
   "plot": {
     "all_layers_on_one_page": 1,
@@ -304,6 +307,7 @@
   },
   "system": {
     "file_history": [
+      "/home/cosmicdoge/Development/amp-test/amp-test.kicad_pcb",
       "/mnt/data/Documents/NYU/EG1003/track-o-tron/platformio/wiring-schematic/wiring-schematic.kicad_pcb"
     ],
     "first_run_shown": true,
@@ -341,6 +345,7 @@
       "snap_to_tracks": true,
       "start_diagonal": false,
       "suggest_finish": false,
+      "walkaround_hug_length_threshold": 1.5,
       "walkaround_iteration_limit": 50
     }
   },
@@ -390,7 +395,7 @@
     },
     "maximized": false,
     "mru_path": "/home/cosmicdoge",
-    "perspective": "layout2|name=InfoBar;caption=;state=131454;dir=1;layer=1;row=0;pos=0;prop=100000;bestw=20;besth=30;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=MainToolbar;caption=;state=139632;dir=1;layer=6;row=0;pos=0;prop=100000;bestw=878;besth=34;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=AuxToolbar;caption=;state=139644;dir=1;layer=5;row=0;pos=0;prop=100000;bestw=877;besth=34;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=MsgPanel;caption=;state=131452;dir=3;layer=6;row=0;pos=0;prop=100000;bestw=274;besth=38;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=OptToolbar;caption=;state=139596;dir=4;layer=3;row=0;pos=0;prop=100000;bestw=34;besth=556;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=ToolsToolbar;caption=;state=139596;dir=2;layer=3;row=0;pos=0;prop=100000;bestw=34;besth=675;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=LayersManager;caption=Appearance;state=1532;dir=2;layer=4;row=0;pos=0;prop=100000;bestw=180;besth=-1;minw=180;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=SelectionFilter;caption=Selection Filter;state=1532;dir=2;layer=4;row=0;pos=1;prop=0;bestw=180;besth=-1;minw=180;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=DrawFrame;caption=;state=1020;dir=5;layer=0;row=0;pos=0;prop=100000;bestw=261;besth=175;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|dock_size(1,6,0)=34|dock_size(1,5,0)=34|dock_size(3,6,0)=38|dock_size(4,3,0)=34|dock_size(2,3,0)=34|dock_size(2,4,0)=180|dock_size(5,0,0)=263|",
+    "perspective": "layout2|name=InfoBar;caption=;state=131454;dir=1;layer=1;row=0;pos=0;prop=100000;bestw=20;besth=30;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=MainToolbar;caption=;state=139632;dir=1;layer=6;row=0;pos=0;prop=100000;bestw=1146;besth=34;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=AuxToolbar;caption=;state=139644;dir=1;layer=5;row=0;pos=0;prop=100000;bestw=877;besth=34;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=MsgPanel;caption=;state=131452;dir=3;layer=6;row=0;pos=0;prop=100000;bestw=274;besth=38;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=OptToolbar;caption=;state=139596;dir=4;layer=3;row=0;pos=0;prop=100000;bestw=34;besth=597;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=ToolsToolbar;caption=;state=139596;dir=2;layer=3;row=0;pos=0;prop=100000;bestw=34;besth=643;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=LayersManager;caption=Appearance;state=1532;dir=2;layer=4;row=0;pos=0;prop=100000;bestw=180;besth=-1;minw=180;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=SelectionFilter;caption=Selection Filter;state=1532;dir=2;layer=4;row=0;pos=1;prop=0;bestw=180;besth=-1;minw=180;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=DrawFrame;caption=;state=1020;dir=5;layer=0;row=0;pos=0;prop=100000;bestw=261;besth=175;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|dock_size(1,6,0)=34|dock_size(1,5,0)=34|dock_size(3,6,0)=38|dock_size(4,3,0)=34|dock_size(2,3,0)=34|dock_size(2,4,0)=180|dock_size(5,0,0)=263|",
     "pos_x": 861,
     "pos_y": 214,
     "size_x": 1837,

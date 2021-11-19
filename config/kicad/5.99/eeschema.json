@@ -2,6 +2,8 @@
   "annotation": {
     "messages_filter": 29,
     "method": 0,
+    "options": 0,
+    "scope": 0,
     "sort_order": 1
   },
   "appearance": {
@@ -213,6 +215,7 @@
   },
   "system": {
     "file_history": [
+      "/home/cosmicdoge/Development/amp-test/amp-test.kicad_sch",
       "/home/cosmicdoge/Development/track-o-tron/wiring-schematic/wiring-schematic.kicad_sch",
       "/mnt/data/Documents/NYU/EG1003/track-o-tron/platformio/wiring-schematic/wiring-schematic.kicad_sch",
       "/mnt/data/Documents/NYU/EG1003/track-o-tron/platformio/wiring-schematic/wiring-schematic.sch"
@@ -220,7 +223,7 @@
     "first_run_shown": true,
     "last_imperial_units": 5,
     "last_metric_units": 1,
-    "last_symbol_lib_dir": "/usr/share/kicad-nightly/library/4xxx.kicad_sym",
+    "last_symbol_lib_dir": "/home/cosmicdoge/Documents/KiCad-library/lib_w_vacuum/w_vacuum.lib",
     "max_undo_items": 0,
     "never_show_rescue_dialog": false,
     "units": 5
@@ -238,7 +241,7 @@
       "last_size": 2,
       "line_width": 1.0,
       "min_spacing": 5.0,
-      "show": false,
+      "show": true,
       "sizes": [
         "100 mil",
         "50 mil",
@@ -255,10 +258,10 @@
     },
     "maximized": false,
     "mru_path": "/home/cosmicdoge",
-    "perspective": "layout2|name=InfoBar;caption=;state=131454;dir=1;layer=1;row=0;pos=0;prop=100000;bestw=20;besth=30;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=MainToolbar;caption=;state=139632;dir=1;layer=6;row=0;pos=0;prop=100000;bestw=1099;besth=34;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=OptToolbar;caption=;state=139596;dir=4;layer=3;row=0;pos=0;prop=100000;bestw=34;besth=232;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=ToolsToolbar;caption=;state=139596;dir=2;layer=2;row=0;pos=0;prop=100000;bestw=34;besth=602;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=DrawFrame;caption=;state=1020;dir=5;layer=0;row=0;pos=0;prop=100000;bestw=261;besth=175;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=MsgPanel;caption=;state=131452;dir=3;layer=6;row=0;pos=0;prop=100000;bestw=274;besth=38;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|dock_size(1,6,0)=34|dock_size(4,3,0)=34|dock_size(2,2,0)=34|dock_size(5,0,0)=263|dock_size(3,6,0)=38|",
-    "pos_x": 1795,
+    "perspective": "layout2|name=InfoBar;caption=;state=131454;dir=1;layer=1;row=0;pos=0;prop=100000;bestw=20;besth=30;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=MainToolbar;caption=;state=139632;dir=1;layer=6;row=0;pos=0;prop=100000;bestw=1140;besth=34;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=OptToolbar;caption=;state=139596;dir=4;layer=3;row=0;pos=0;prop=100000;bestw=34;besth=232;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=ToolsToolbar;caption=;state=139596;dir=2;layer=2;row=0;pos=0;prop=100000;bestw=34;besth=602;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=DrawFrame;caption=;state=1020;dir=5;layer=0;row=0;pos=0;prop=100000;bestw=261;besth=175;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=MsgPanel;caption=;state=131452;dir=3;layer=6;row=0;pos=0;prop=100000;bestw=274;besth=38;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|dock_size(1,6,0)=34|dock_size(4,3,0)=34|dock_size(2,2,0)=34|dock_size(5,0,0)=263|dock_size(3,6,0)=38|",
+    "pos_x": 861,
     "pos_y": 214,
-    "size_x": 903,
+    "size_x": 1837,
     "size_y": 1040,
     "zoom_factors": [
       0.05,

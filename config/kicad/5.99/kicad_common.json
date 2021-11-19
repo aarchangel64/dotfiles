@@ -16,7 +16,6 @@
   "environment": {
     "show_warning_dialog": true,
     "vars": {
-      "KICAD6_3DMODEL_DIR": "/usr/share/kicad-nightly/3dmodels/",
       "KICAD6_FOOTPRINT_DIR": "/usr/share/kicad-nightly/modules",
       "KICAD6_SYMBOL_DIR": "/usr/share/kicad-nightly/library",
       "KICAD6_TEMPLATE_DIR": "/usr/share/kicad/template",
