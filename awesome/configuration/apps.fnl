@@ -67,7 +67,7 @@
                     ;; "xidlehook --not-when-fullscreen --not-when-audio --timer 600 awesome-client 'awesome.emit_signal(\"module::lockscreen_show\")'"
                     ;; You can add more start-up applications here
                     "xsetroot -cursor_name left_ptr"
-                    "feh --bg-fill $HOME/Pictures/Wallpapers/lofi_cafe.jpg"
+                    "feh --bg-fill $HOME/Pictures/Wallpapers/sci_fi_city.jpg"
                     "copyq"
                     "udiskie -t"
                     ]
