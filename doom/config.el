@@ -87,6 +87,8 @@
 (load! "lang/python")
 (load! "lang/pkgbuild")
 
+;; (setq-hook! 'web-mode-hook +format-with 'prettier-prettify)
+(add-hook 'web-mode-hook 'prettier-js-mode)
 ;;; =============================== OTHER CONFIGS ==============================
 ;; (load! "project")
 (load! "mapping")

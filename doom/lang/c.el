@@ -13,4 +13,8 @@
                                   "--suggest-missing-includes"
                                   "--recovery-ast"
                                   "--header-insertion=never"
-                                  "--fallback-style=Microsoft")))
+                                  "--fallback-style=llvm")))
+
+(add-hook! 'c-mode-common-hook #'clang-format+-mode)
+(setq clang-format+-always-enable t
+      clang-format-fallback-style "llvm")

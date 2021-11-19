@@ -92,6 +92,7 @@
      (?. ("\\cdot" "\\dots"))
      (?: ("\\vdots" "\\ddots"))
      (?* ("\\times" "\\star" "\\ast"))
+     (?b ("\\beta" "\\binom{?}{}"))
      (?I ("\\implies" "\\Im"))))
   (cdlatex-math-modify-alist
    '(;;my own stuff
@@ -99,7 +100,11 @@
      (?a "\\abs" nil t nil nil)))
   (cdlatex-command-alist
    '(
-     ("ssu" "Insert starred subsection" "\\subsection*{?}" cdlatex-position-cursor nil t nil))))
+     ("xx" "Times" "\\times ?" cdlatex-position-cursor nil nil t)
+     ("bin" "Binomial" "\\binom{?}{}" cdlatex-position-cursor nil nil t)
+     ("sec" "Insert Section" "\\section{}?" cdlatex-position-cursor nil t nil)
+     ("secu" "Insert Starred Section" "\\section*{}?" cdlatex-position-cursor nil t nil)
+     ("ssu" "Insert Starred subsection" "\\subsection*{?}" cdlatex-position-cursor nil t nil))))
 
 ;; Visuals
 (add-hook 'LaTeX-mode-hook #'mixed-pitch-mode)

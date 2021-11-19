@@ -31,7 +31,12 @@
 
 ;;; ==================================== Keymap ===================================
 
+(map! :mode org-mode
+      :v "*" #'org-emphasize)
+
 (after! org
+  (setq org-hide-emphasis-markers nil)
+  (setq org-support-shift-select t)
   (setq evil-org-movement-bindings '((up . "<up>") (down . "<down>") (left . "<left>") (right . "<right>")))
   (setq org-todo-keywords
         '((sequence "TODO(!t/)" "IN PROGRESS(!p/)" "FINISHING UP(f)" "|" "DONE(!d/)"))))
