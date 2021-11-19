@@ -1,5 +1,0 @@
-# AMD Native microarchitecture
-export _microarchitecture=99
-
-export _localmodcfg=y
-
