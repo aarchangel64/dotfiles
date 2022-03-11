@@ -104,7 +104,22 @@
      ("bin" "Binomial" "\\binom{?}{}" cdlatex-position-cursor nil nil t)
      ("sec" "Insert Section" "\\section{}?" cdlatex-position-cursor nil t nil)
      ("secu" "Insert Starred Section" "\\section*{}?" cdlatex-position-cursor nil t nil)
-     ("ssu" "Insert Starred subsection" "\\subsection*{?}" cdlatex-position-cursor nil t nil))))
+     ("ssu" "Insert Starred subsection" "\\subsection*{?}" cdlatex-position-cursor nil t nil)
+     ("tab" "Insert Table" "\\begin{table}[h]
+\\captionsetup{justification=centering, labelsep=newline}
+\\centering
+\\caption{?}
+\\label{}
+\\begin{tabularx}{\\columnwidth}{@{}c|*{}{C}c@{}}
+\\toprule
+
+\\midrule
+
+\\bottomrule
+\\end{tabularx}
+\\end{table}" cdlatex-position-cursor nil t nil))))
+
+
 
 ;; Visuals
 (add-hook 'LaTeX-mode-hook #'mixed-pitch-mode)
@@ -182,11 +197,11 @@
         ("｢{1}" ("begin"))
         ("{1}｣" ("end"))))
 (defun cosmic/test (input)
- (progn
-   (message input)
-   (concat "test" " 2 " input)))
-  
-  
+  (progn
+    (message input)
+    (concat "test" " 2 " input)))
+
+
 (defun string-offset-roman-chars (offset word)
   "Shift the codepoint of each charachter in WORD by OFFSET with an extra -6 shift if the letter is lowercase"
   (apply 'string
@@ -224,7 +239,7 @@
     (120136 . 8474)                     ; ℚ
     (120137 . 8477)                     ; ℝ
     (120145 . 8484))                     ; ℤ
-    
+
   "An alist of deceptive codepoints, and then where the glyph actually resides.")
 (defun string-offset-apply-roman-char-exceptions (char)
   "Sometimes the codepoint doesn't contain the char you expect.
