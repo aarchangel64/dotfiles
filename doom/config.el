@@ -19,8 +19,8 @@
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
 
-(setq doom-font "Iosevka Cosmic-12"
-      doom-variable-pitch-font "Iosevka Cosmic Aile-12")
+(setq doom-font "Iosevka 14"
+      doom-variable-pitch-font "Iosevka Aile 14")
 
 ;; Default: 'doom-one'
 ;; My favourites: doom-henna, doom-horizon, doom-challenger-deep
@@ -73,8 +73,9 @@
    fennel-mode
    python-mode
    emacs-lisp-mode))
-   
 
+;; Add custom snippet directory
+(setq yas-snippet-dirs (append yas-snippet-dirs '(".config/doom/snippets")))
 
 ;;; =========================== LANGUAGE CONFIGURATIONS ===========================
 (load! "lang/c")

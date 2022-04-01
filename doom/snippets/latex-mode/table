@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: table
+# key: tab
+# --
+\begin{table}[h]
+	\captionsetup{justification=centering, labelsep=newline}
+	\centering
+	\caption{$1}
+	\label{table:$2}
+	\begin{tabularx}{\columnwidth}{@{}c|*{${3:3}}{C}}
+		\toprule
+        $4 ${3:$(apply 'concat (make-list (string-to-number yas-text) "& "))} \\
+		\midrule
+        $5 ${3:$(apply 'concat (make-list (string-to-number yas-text) "& "))} \\
+		\bottomrule
+	\end{tabularx}
+\end{table}
+$0

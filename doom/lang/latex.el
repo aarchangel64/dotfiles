@@ -68,9 +68,6 @@
 ;; Based on https://tecosaur.github.io/emacs-config/config.html
 ;; (add-hook 'latex-mode-hook #'TeX-latex-mode)
 
-(map! :map cdlatex-mode-map
-      :i "TAB" #'cdlatex-tab)
-
 (use-package! cdlatex
   :hook tex-mode
   :custom
@@ -104,21 +101,7 @@
      ("bin" "Binomial" "\\binom{?}{}" cdlatex-position-cursor nil nil t)
      ("sec" "Insert Section" "\\section{}?" cdlatex-position-cursor nil t nil)
      ("secu" "Insert Starred Section" "\\section*{}?" cdlatex-position-cursor nil t nil)
-     ("ssu" "Insert Starred subsection" "\\subsection*{?}" cdlatex-position-cursor nil t nil)
-     ("tab" "Insert Table" "\\begin{table}[h]
-\\captionsetup{justification=centering, labelsep=newline}
-\\centering
-\\caption{?}
-\\label{}
-\\begin{tabularx}{\\columnwidth}{@{}c|*{}{C}c@{}}
-\\toprule
-
-\\midrule
-
-\\bottomrule
-\\end{tabularx}
-\\end{table}" cdlatex-position-cursor nil t nil))))
-
+     ("ssu" "Insert Starred subsection" "\\subsection*{?}" cdlatex-position-cursor nil t nil))))
 
 
 ;; Visuals
