@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: SIUnitX Quantity
+# uuid: qty
+# key: q
+# --
+
+\qty{$1}{$2} $0

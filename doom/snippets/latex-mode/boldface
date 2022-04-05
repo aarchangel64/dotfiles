@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: boldface
+# uuid: boldface
+# key: bf
+# condition: t
+# --
+\textbf{$1} $0

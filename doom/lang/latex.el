@@ -5,6 +5,12 @@
 ;; auctex options
 (setq preview-image-type 'dvipng
       TeX-fold-type-list '(env macro math))
+(setq
+ ;; Compilation settings
+ TeX-engine-alist
+ '((xetex "XeTeX -shell escape"
+          "xetex -shell-escape"
+          "xelatex -shell-escape")))
 (setq-default TeX-engine 'xetex)
 
 (use-package! preview
