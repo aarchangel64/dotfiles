@@ -9,7 +9,7 @@ set -gx STARSHIP_SHELL "fish"
 set -gx STARSHIP_SESSION_KEY (random 10000000000000 9999999999999999)
 
 
-# starship init fish | source
+starship init fish | source
 source /etc/grc.fish
 # set -x string split ' ' -f2 (alias) | string join ','
 set -gx VOLTA_HOME "$HOME/.volta"

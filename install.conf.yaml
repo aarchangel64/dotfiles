@@ -9,20 +9,10 @@
       recursive: true
 
 - link:
-    ~/:
-      glob: true
-      path: home/*
-      prefix: '.'
-
-    ~/.config/:
-      glob: true
-      path: config/**
-
     ~/.config/fish/:
       path: shell/fish/**
       glob: true
 
-    ~/.config/awesome:
-    ~/.config/boxes: resources/boxes
     ~/.config/doom:
-    ~/.config/starship.toml: shell/starship.toml
+
+    #    ~/.config/starship.toml: shell/starship.toml

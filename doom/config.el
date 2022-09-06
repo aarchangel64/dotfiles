@@ -19,8 +19,8 @@
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
 
-(setq doom-font "Iosevka Cosmic-12"
-      doom-variable-pitch-font "Iosevka Cosmic-12")
+(setq doom-font "Iosevka 14"
+      doom-variable-pitch-font "Iosevka 14")
 
 ;; Default: 'doom-one'
 ;; My favourites: doom-henna, doom-horizon, doom-challenger-deep
