@@ -1,21 +1,25 @@
-[init]
-	defaultBranch = master
 [user]
-	name = Shrey Pasricha
 	email = shrey.pasricha@gmail.com
+	name = Shrey Pasricha
+
+[push]
+	autoSetupRemote = true
+
 [pull]
-	rebase = false
+	ff = true
+	rebase = true
+
 [core]
-	excludesfile = /home/cosmicdoge/.gitignore_global
-	autocrlf = input
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+
+[merge]
+    conflictstyle = diff3
 
 [diff]
-    tool = kitty
-    guitool = kitty.gui
-[difftool]
-    prompt = false
-    trustExitCode = true
-[difftool "kitty"]
-    cmd = kitty +kitten diff $LOCAL $REMOTE
-[difftool "kitty.gui"]
-    cmd = kitty kitty +kitten diff $LOCAL $REMOTE
+    colorMoved = default

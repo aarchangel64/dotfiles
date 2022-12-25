@@ -9,9 +9,16 @@
       recursive: true
 
 - link:
+    ~/:
+      glob: true
+      path: home/*
+      prefix: '.'
+
     ~/.config/fish/:
       path: shell/fish/**
       glob: true
+
+  #    ~/.config/systemd/user:
 
     ~/.config/doom:
 
