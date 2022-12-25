@@ -14,3 +14,10 @@ source /etc/grc.fish
 # set -x string split ' ' -f2 (alias) | string join ','
 set -gx VOLTA_HOME "$HOME/.volta"
 set -gx PATH "$VOLTA_HOME/bin" $PATH
+
+# pnpm
+set -gx PNPM_HOME "/home/cosmicdoge/.local/share/pnpm"
+set -gx PATH "$PNPM_HOME" $PATH
+# pnpm end
+
+set -gx SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/ssh-agent.socket"
