@@ -1,20 +1,29 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; $DOOMDIR/packages.el
 
+;; Needed for verilog verilator fix
+(unpin! flycheck)
+(unpin! tree-sitter-langs)
+
 (package! aggressive-indent)
 ;; (package! math-preview)
 (package! ialign)
 (package! banner-comment)
 (package! pkgbuild-mode)
 (package! platformio-mode)
+(package! verilog-mode :recipe (:host github :repo "veripool/verilog-mode"))
 (package! sphinx-doc)
 (package! elcord)
+(package! nhexl-mode)
+(package! grip-mode)
 
 (package! prettier-js)
 (package! clang-format+)
 
-(package! lsp-julia :recipe (:host github :repo "non-jedi/lsp-julia"))
-(package! fennel-mode :recipe (:host gitlab :repo "technomancy/fennel-mode"))
+(package! tiny :recipe (:host github :repo "abo-abo/tiny"))
+
+(package! markdown-xwidget :recipe (:host github :repo "Cosmic-Goat/markdown-xwidget" :files (:defaults "resources")))
+;; (package! markdown-xwidget :recipe (:host github :repo "cfclrk/markdown-xwidget" :files (:defaults "resources")))
 
 
 ;; If the package you are trying to install does not contain a PACKAGENAME.el

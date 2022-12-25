@@ -12,8 +12,19 @@
       :n [mouse-9] #'better-jumper-jump-forward)
 
 
+;; (map! :after nhexl-mode
+;;       :map nhexl-mode-map
+;;       :n "<left>"       #'nhexl-nibble-backward
+;;       :n "<right>"      #'nhexl-nibble-forward)
+
 ;;; =============================== Utility Bindings ==============================
 
-(map! :after banner-comment
-      :n "g C" #'banner-comment)
+(map!
+ :n "g C" #'banner-comment)
 
+(map!
+ :leader
+ :desc "Tiny Expand" "i t" #'tiny-expand)
+
+(map!
+ :desc "Tiny Expand" :i "C-;" #'tiny-expand)
