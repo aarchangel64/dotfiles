@@ -13,13 +13,18 @@
       glob: true
       path: home/*
       prefix: '.'
+ 
+    ~/.config/:
+      glob: true
+      path: config/**
 
     ~/.config/fish/:
-      path: shell/fish/**
       glob: true
+      path: shell/fish/**
+
+    ~/.config/doom:
 
   #    ~/.config/systemd/user:
 
-    ~/.config/doom:
 
     #    ~/.config/starship.toml: shell/starship.toml
