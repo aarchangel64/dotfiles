@@ -1,3 +1,6 @@
+#env
+LESS = -i -R -F
+
 #command
 / forw-search ^W
 ? back-search ^W
