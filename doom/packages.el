@@ -5,6 +5,10 @@
 (unpin! flycheck)
 (unpin! tree-sitter-langs)
 
+;; Use latest commit to get support for Astro
+(unpin! web-mode)
+(unpin! lsp-mode)
+
 (package! aggressive-indent)
 ;; (package! math-preview)
 (package! ialign)
@@ -13,13 +17,20 @@
 (package! platformio-mode)
 (package! verilog-mode :recipe (:host github :repo "veripool/verilog-mode"))
 (package! sphinx-doc)
+
+;; https://github.com/emacs-vs/ts-docstr/issues/1
+;; (package! msgu :recipe (:host github :repo "jcs-elpa/msgu"))
+;; (package! ts-docstr :recipe (:host github :repo "emacs-vs/ts-docstr"
+;;                              :files (:defaults "langs/*.el")))
+
 (package! elcord)
 (package! nhexl-mode)
-(package! grip-mode)
+;; (package! grip-mode)
 
 (package! prettier-js)
 (package! clang-format+)
 
+(package! lsp-tailwindcss :recipe (:host github :repo "merrickluo/lsp-tailwindcss"))
 (package! tiny :recipe (:host github :repo "abo-abo/tiny"))
 
 (package! markdown-xwidget :recipe (:host github :repo "Cosmic-Goat/markdown-xwidget" :files (:defaults "resources")))

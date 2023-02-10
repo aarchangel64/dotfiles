@@ -3,20 +3,22 @@
 ;;; ==================================== LaTeX / AucTeX ====================================
 
 ;; auctex options
-(setq preview-image-type 'dvipng
-      TeX-fold-type-list '(env macro math))
-(setq
- ;; Compilation settings
- TeX-command-extra-options "-shell-escape")
-;; TeX-engine-alist
-;; '((xetex "XeTeX -shell escape"
-;; "xetex -shell-escape"
-;; "xelatex -shell-escape")
-(setq-default TeX-engine 'xetex)
 
-(use-package! preview
-  :config
-  (set-default 'preview-scale-function 2.0))
+(after! tex
+  ;; Compilation settings
+  (setq TeX-command-extra-options "-shell-escape")
+  ;; TeX-engine-alist
+  ;; '((xetex "XeTeX -shell escape"
+  ;; "xetex -shell-escape"
+  ;; "xelatex -shell-escape")
+  (setq-default TeX-engine 'xetex))
+
+(after! preview
+  (set-default 'preview-scale-function 2.0)
+  (setq preview-image-type 'dvipng
+        TeX-fold-type-list '(env macro math)))
+
+
 
 ;;; NOTE: Disable math-preview since auctex preview isn't blurry anymore
 ;; math-preview options
@@ -111,7 +113,9 @@
      ("ssu" "Insert Starred subsection" "\\subsection*{?}" cdlatex-position-cursor nil t nil))))
 
 ;; (setq 'LaTeX-verbatim-macros-with-braces-local (remove 'href 'LaTeX-verbatim-macros-with-braces-local))
-(delete "href" LaTeX-verbatim-macros-with-braces-local)
+;; NOTE: does this still work after moving into after! block?
+(after! latex
+  (delete "href" LaTeX-verbatim-macros-with-braces-local))
 
 ;; Visuals
 (add-hook 'LaTeX-mode-hook #'mixed-pitch-mode)
