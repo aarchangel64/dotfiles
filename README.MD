@@ -24,7 +24,7 @@ This is my personal dotfiles configuration, welcome aboard!
 
 - **Terminal Emulator:** [Kitty](https://sw.kovidgoyal.net/kitty/)
 - **Shell:** [Fish](https://fishshell.com)
-    - _You can thank my friend [Brian](https://github.com/fdeitylink) for making me a fisher 🐟_
+    - _You can thank my friend [Eloise](https://github.com/fdeitylink) for making me a fisher 🐟_
 
 ![Fish Shell](resources/images/fish-shell.png)
 
