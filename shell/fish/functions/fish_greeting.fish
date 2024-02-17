@@ -9,6 +9,7 @@ function fish_greeting
     end
 
     #kitty +kitten icat --align left --scale-up --place $pos $pod_img
+    # viu $pod_img -t -w 16
     fortune ~/dotfiles/resources/fortune/pod |
         fmt -w (math "round($COLUMNS * 0.75)") |
         boxes -d square-brackets -a c -p h2v1 |
