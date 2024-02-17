@@ -22,7 +22,6 @@
       path: shell/fish/**
       glob: true
 
-    ~/.config/awesome:
     ~/.config/boxes: resources/boxes
     ~/.config/doom:
     ~/.config/starship.toml: shell/starship.toml

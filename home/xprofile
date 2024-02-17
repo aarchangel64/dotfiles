@@ -1,5 +1,0 @@
-#!/bin/sh
-# export QT_STYLE_OVERRIDE=kvantum
-
-xrandr --output DVI-I-1 --auto --scale 1.5x1.5 --output DP-2 --auto --pos 1620x360 
-xsetroot -cursor_name left_ptr 
