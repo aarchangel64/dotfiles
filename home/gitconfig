@@ -1,6 +1,6 @@
 [user]
 	email = shrey.pasricha@gmail.com
-	name = Shrey Pasricha
+	name = Maya Pasricha
 
 [push]
 	autoSetupRemote = true
@@ -23,3 +23,5 @@
 
 [diff]
     colorMoved = default
+[init]
+	defaultBranch = master

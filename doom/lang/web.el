@@ -1,22 +1,22 @@
 ;;; ../../.dotfiles/doom/lang/web.el -*- lexical-binding: t; -*-
 
 ;; (setq-hook! 'web-mode-hook +format-with 'prettier-prettify)
-(add-hook! 'web-mode-hook #'prettier-js-mode #'tree-sitter-hl-mode)
-(use-package! web-mode
-  :mode (rx ".astro" string-end))
+(add-hook! 'web-mode-hook #'lsp #'tree-sitter-hl-mode)
+(use-package! web-mode :mode (rx ".astro" string-end))
+
+;; NOTE: astro-ls is exported as an npm dependency of astro, so you don't have to install it globally.
 
 (setq lsp-tailwindcss-add-on-mode t)
 
-(after! (web-mode tree-sitter)
-  (when (string= (web-mode-detect-engine) "astro")
-    ;; (setf (alist-get 'web-mode tree-sitter-major-mode-language-alist) 'astro)
-    (tree-sitter-require 'astro)))
+(after!
+ (web-mode tree-sitter)
+ (when (string= (web-mode-detect-engine) "astro")
+   ;; (setf (alist-get 'web-mode tree-sitter-major-mode-language-alist) 'astro)
+   (tree-sitter-require 'astro)))
 
-(use-package! jsonc-mode
-  :mode (rx (or ".json5" "tsconfig.json") string-end))
+(use-package! jsonc-mode :mode (rx (or ".json5" "tsconfig.json") string-end))
 
-(after! (jsonc-mode tree-sitter)
-  (tree-sitter-require 'json5))
+(after! (jsonc-mode tree-sitter) (tree-sitter-require 'json5))
 
 ;; (when (string= (file-name-extension buffer-file-name) "json5"))
 
@@ -39,26 +39,33 @@
 (defun cosmic/ts-ls-find-source (&key display-action)
   "Find source of the symbol under point."
   (interactive)
-  (lsp-find-custom "_typescript.goToSourceDefinition" nil :display-action display-action))
+  (lsp-find-custom
+   "_typescript.goToSourceDefinition"
+   nil
+   :display-action display-action))
 
-(after! (evil lsp-mode lsp-ui typescript-mode)
+(after!
+  (evil tide)
   (evil-set-command-property 'cosmic/lsp-find-source :jump t)
-  (set-lookup-handlers! 'lsp-ui-mode :definition nil)
-  (set-lookup-handlers! 'lsp-mode :definition nil)
-  (set-lookup-handlers! 'typescript-mode
-    :definition 'cosmic/ts-ls-find-source))
+  ;; Kind of a hack, use tide-mode to tell Doom when it should use the custom lookup.
+  ;; Using tide-mode instead of typescript-mode because minor modes seem to always
+  ;; stack on top of major modes, and the lsp lookup functions were overriding it when set to a major mode.
+  (set-lookup-handlers! 'tide-mode :definition 'cosmic/ts-ls-find-source))
 
 ;; Fix for ts-ls until Emacs 29, see: https://github.com/typescript-language-server/typescript-language-server/issues/559#issuecomment-1259470791
 ;; same definition as mentioned earlier
-(advice-add 'json-parse-string :around
-            (lambda (orig string &rest rest)
-              (apply orig (s-replace "\\u0000" "" string)
-                     rest)))
+(advice-add
+ 'json-parse-string
+ :around
+ (lambda (orig string &rest rest)
+   (apply orig (s-replace "\\u0000" "" string) rest)))
 
 ;; minor changes: saves excursion and uses search-forward instead of re-search-forward
-(advice-add 'json-parse-buffer :around
-            (lambda (oldfn &rest args)
-	      (save-excursion
-                (while (search-forward "\\u0000" nil t)
-                  (replace-match "" nil t)))
-	      (apply oldfn args)))
+(advice-add
+ 'json-parse-buffer
+ :around
+ (lambda (oldfn &rest args)
+   (save-excursion
+     (while (search-forward "\\u0000" nil t)
+       (replace-match "" nil t)))
+   (apply oldfn args)))

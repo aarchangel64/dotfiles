@@ -1,4 +1,4 @@
 # Defined via `source`
-function la --wraps='exa -Fla --group-directories-first' --wraps='exa --all --long --classify --git --header --group-directories-first' --description 'alias la=exa --all --long --classify --git --header --group-directories-first'
-  exa --all --long --classify --git --header --group-directories-first $argv; 
+function la --wraps='eza -Fla --group-directories-first' --wraps='eza --all --long --classify --git --header --group-directories-first' --description 'alias la=eza --all --long --classify --git --header --group-directories-first'
+  eza --all --long --classify --git --header --group-directories-first $argv; 
 end

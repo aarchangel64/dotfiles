@@ -14,7 +14,9 @@
       :n "g C"                   #'banner-comment
 
       (:leader
-       :desc "Tiny Expand" "i t" #'tiny-expand))
+       :desc "Tiny Expand" "i t" #'tiny-expand)
+      (:leader
+       :desc "Generate Doc String" "c g" #'ts-docstr-at-point))
 ;; (map! :after nhexl-mode
 ;;       :map nhexl-mode-map
 ;;       :n "<left>"       #'nhexl-nibble-backward

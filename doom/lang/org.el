@@ -19,14 +19,27 @@
 ;;              )
 
 (after! ox-latex
-  (add-to-list 'org-latex-classes
-               '("studyguide" "\\documentclass{studyguide}"
-                 ("\\chapter{%s}" . "\\chapter*{%s}")
-                 ("\\section{%s}" . "\\section*{%s}")
-                 ("\\subsection{%s}" . "\\subsection*{%s}")
-                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
-                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
+  ;; Packages
+  (add-to-list 'org-latex-packages-alist '("" "tabularx"))
+
+  ;; Classes
+
+  (defun add-latex-class (name command)
+    "Add NAME class to org-latex-classes with COMMAND"
+    (add-to-list 'org-latex-classes
+                 (list name command
+                       '("\\chapter{%s}" . "\\chapter*{%s}")
+                       '("\\section{%s}" . "\\section*{%s}")
+                       '("\\subsection{%s}" . "\\subsection*{%s}")
+                       '("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                       '("\\paragraph{%s}" . "\\paragraph*{%s}")
+                       '("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
+
+  (add-latex-class "book" "\\documentclass[10pt]{memoir}")
+  (add-latex-class "scrartcl" "\\documentclass{scrartcl}")
+  (add-latex-class "tufte-handout" "\\documentclass{tufte-handout}")
+  (add-latex-class "studyguide" "\\documentclass{studyguide}"))
+
 
 
 ;;; ==================================== Keymap ===================================
@@ -79,7 +92,11 @@
   (setq org-support-shift-select t)
   (setq evil-org-movement-bindings '((up . "<up>") (down . "<down>") (left . "<left>") (right . "<right>")))
   (setq org-todo-keywords
-        '((sequence "TODO(!t/)" "IN PROGRESS(!p/)" "FINISHING UP(f)" "|" "DONE(!d/)"))))
+        '((sequence "TODO(!t/)" "IN PROGRESS(!p/)" "FINISHING UP(f)" "|" "DONE(!d/)")))
+  (setq org-clock-clocktable-default-properties '(:maxlevel 5 :timestamp t)))
+
+
+
 ;; (setq org-todo-keyword-faces
 ;;       '(("IN PROGRESS" . (:foreground "yellow")))
 ;; )

@@ -1,0 +1,54 @@
+{
+  "parser-directories": [
+    "/home/cosmicdoge/Build/tree-sitter"
+  ],
+  "theme": {
+    "constant.builtin": {
+      "bold": true,
+      "color": 94
+    },
+    "type.builtin": {
+      "bold": true,
+      "color": 23
+    },
+    "function.builtin": {
+      "bold": true,
+      "color": 26
+    },
+    "function": 26,
+    "constant": 94,
+    "variable.builtin": {
+      "bold": true
+    },
+    "property": 124,
+    "number": {
+      "bold": true,
+      "color": 94
+    },
+    "keyword": 56,
+    "constructor": 136,
+    "string": 28,
+    "tag": 18,
+    "embedded": null,
+    "operator": {
+      "color": 239,
+      "bold": true
+    },
+    "comment": {
+      "italic": true,
+      "color": 245
+    },
+    "punctuation.delimiter": 239,
+    "attribute": {
+      "color": 124,
+      "italic": true
+    },
+    "variable.parameter": {
+      "underline": true
+    },
+    "type": 23,
+    "string.special": 30,
+    "punctuation.bracket": 239,
+    "module": 136
+  }
+}

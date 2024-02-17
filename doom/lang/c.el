@@ -25,4 +25,4 @@
 (add-hook! 'c-mode-common-hook #'clang-format+-mode)
 (after! clang-format
   (setq clang-format+-always-enable t
-        clang-format-fallback-style "llvm"))
+        clang-format-fallback-style "Microsoft"))

@@ -6,14 +6,19 @@
 ;; https://www.reddit.com/r/emacs/comments/osscfd/pgtk_emacswaylandgnome_no_shiftspace/i4k9pxm/
 ;; https://lists.gnu.org/archive/html/bug-gnu-emacs/2021-07/msg00071.html
 (setq pgtk-use-im-context-on-new-connection nil)
-(pgtk-use-im-context nil)
+;; Check if frames are in use, otherwise this throws an error
+(when window-system (pgtk-use-im-context nil))
 
 
+;; fix for using fish shell, doom tells me to put this here
+(setq shell-file-name (executable-find "bash"))
+(setq-default vterm-shell (executable-find "fish"))
+(setq-default explicit-shell-file-name (executable-find "fish"))
 ;; ==================================== Basics ===================================
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
-(setq user-full-name "Shrey Pasricha"
+(setq user-full-name "Maya Pasricha"
       user-mail-address "shrey.pasricha@gmail.com")
 
 
@@ -86,6 +91,16 @@
 (global-tree-sitter-mode)
 
 
+;; ============================== LSP CONFIGURATION ==============================
+
+(setq lsp-enable-symbol-highlighting nil)
+(setq lsp-lens-enable t)
+(setq lsp-ui-doc-enable t)
+(setq lsp-ui-doc-show-with-cursor t)
+(setq lsp-ui-doc-show-with-mouse t)
+(setq lsp-ui-sideline-show-code-actions t)
+
+
 ;; ============================== MISC CONFIGURATION =============================
 
 (setq evil-snipe-spillover-scope 'whole-visible)
@@ -109,9 +124,11 @@
          emacs-lisp-mode))
 
 ;; Add custom snippet directory
-(cl-pushnew '(".dotfiles/doom/snippets") yas-snippet-dirs)
-;; add yas-snippet to hippie expand
-(push #'yas-hippie-try-expand hippie-expand-try-functions-list)
+(after! (yasnippet doom-snippets)
+  (push ".dotfiles/doom/snippets" yas-snippet-dirs)
+  (yas-reload-all)
+  ;; add yas-snippet to hippie expand
+  (push #'yas-hippie-try-expand hippie-expand-try-functions-list))
 
 ;; Git stuffs
 (after! magit
@@ -122,26 +139,7 @@
 
 ;; Load all files from the (relative) lang/ dir
 (mapc (lambda (f) (load! f))
-      (directory-files "lang" t "\\.el$"))
-
-;; (use-package! grip-mode
-;;   :commands
-;;   ;; :hook markdown-mode
-;;   :config
-;;   ;; (setq grip-preview-use-webkit t)
-;;   (require 'auth-source)
-;;   (setq auth-source-debug t)
-;;   (setq auth-sources
-;;         '(
-;;           ;; default
-;;           ;; "secrets:session"
-;;           ;; "secrets:Login"
-;;           ;; "secrets:default"
-;;           ;; "~/.emacs.d/.local/state/authinfo.gpg"
-;;           "~/.authinfo.gpg"))
-;;   (let ((credential (auth-source-user-and-password "api.github.com" "Cosmic-Goat")))
-;;     (setq grip-github-user (car credential)
-;;           grip-github-password (cadr credential))))
+      (directory-files (expand-file-name "lang" doom-user-dir) t "\\.el$"))
 
 (use-package! markdown-xwidget
   :after markdown-mode
