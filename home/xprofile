@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# https://bbs.archlinux.org/viewtopic.php?id=293558
+if [ -d /etc/X11/xinit/xinitrc.d ] ; then
+for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
+  [ -x "$f" ] && . "$f"
+done
+unset f
+fi
+
+#export QT_STYLE_OVERRIDE=kvantum
+export QT_QPA_PLATFORMTHEME=qt6ct 
+
+# disabled in plasma 5.27 or something
+#export GDK_SCALE=2
+#export GDK_DPI_SCALE=0.5 
+
+#export QT_AUTO_SCREEN_SCALE_FACTOR=0
+#export QT_ENABLE_HIGHDPI_SCALING=0
+#export QT_FONT_DPI=192
+
+export GBM_BACKEND=nvidia-drm
+export __GLX_VENDOR_LIBRARY_NAME=nvidia
+
+# This fixes dolphing file associations
+XDG_MENU_PREFIX=plasma- kbuildsycoca6 
+
+xrandr --output HDMI-0 --auto --scale 1.5x1.5 --rotate left --output DP-4 --auto --pos 1620x400 --primary --output DP-2 --off --dpi 192
+# xsetroot -cursor_name left_ptr 
+
+# Set default audio channel
+# I'm sure there's some way to do this via pipewire's config but I'm too lazy right now.
+pactl set-default-sink alsa_output.usb-BEHRINGER_UMC204HD_192k-00.HiFi__Line1__sink
