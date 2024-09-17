@@ -6,7 +6,7 @@
 - clean:
     ~/:
     ~/.config:
-      recursive: true
+      recursive: false
 
 - link:
     ~/:
@@ -23,5 +23,6 @@
       glob: true
 
     ~/.config/boxes: resources/boxes
+    ~/.config/nvim:
     ~/.config/doom:
     ~/.config/starship.toml: shell/starship.toml
