@@ -2,3 +2,12 @@
 bindings = [
   { mouse = "Right", action = "Copy" },
 ]
+
+[keyboard]
+bindings = [
+  { key = "N", mods = "Control|Shift", action = "CreateNewWindow" }
+]
+
+[font]
+normal = { family = "Iosevka Term Nerd Font", style = "Regular" }
+size = 11.0
