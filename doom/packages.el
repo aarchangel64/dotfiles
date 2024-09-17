@@ -1,20 +1,39 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; $DOOMDIR/packages.el
 
+;; Needed for verilog verilator fix
+(unpin! flycheck)
+(unpin! tree-sitter-langs)
+
+;; Use latest commit to get support for Astro
+(unpin! web-mode)
+(unpin! lsp-mode)
+
 (package! aggressive-indent)
 ;; (package! math-preview)
 (package! ialign)
 (package! banner-comment)
 (package! pkgbuild-mode)
 (package! platformio-mode)
-(package! sphinx-doc)
-(package! elcord)
+(package! verilog-mode :recipe (:host github :repo "veripool/verilog-mode"))
+;; (package! sphinx-doc)
 
+;; https://github.com/emacs-vs/ts-docstr/issues/1
+(package! msgu :recipe (:host github :repo "jcs-elpa/msgu"))
+(package! ts-docstr :recipe (:host github :repo "emacs-vs/ts-docstr"
+                             :files (:defaults "langs/*.el")))
+
+(package! elcord)
+(package! nhexl-mode)
 (package! prettier-js)
 (package! clang-format+)
+(package! elisp-autofmt)
 
-(package! lsp-julia :recipe (:host github :repo "non-jedi/lsp-julia"))
-(package! fennel-mode :recipe (:host gitlab :repo "technomancy/fennel-mode"))
+(package! lsp-tailwindcss :recipe (:host github :repo "merrickluo/lsp-tailwindcss"))
+(package! tiny :recipe (:host github :repo "abo-abo/tiny"))
+
+(package! markdown-xwidget :recipe (:host github :repo "Cosmic-Goat/markdown-xwidget" :files (:defaults "resources")))
+;; (package! markdown-xwidget :recipe (:host github :repo "cfclrk/markdown-xwidget" :files (:defaults "resources")))
 
 
 ;; If the package you are trying to install does not contain a PACKAGENAME.el

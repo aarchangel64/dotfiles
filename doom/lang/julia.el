@@ -1,7 +1,7 @@
 ;;; ../../.dotfiles/doom/lang/julia.el -*- lexical-binding: t; -*-
 
-(use-package! julia-mode
-  :config
+(after! julia-mode
+  ;; https://docs.doomemacs.org/v21.12/#/prerequisites/language-server/lsp-julia
   (setq lsp-julia-package-dir nil)
-  (setq lsp-enable-folding t)
-  (setq lsp-julia-default-environment "~/.julia/environments/v1.6"))
+  (setq lsp-julia-default-environment "~/.julia/environments/v1.9")
+  (setq lsp-enable-folding t))
