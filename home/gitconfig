@@ -1,10 +1,16 @@
 [init]
 	defaultBranch = main
+
 [user]
 	name = Maya Pasricha
 	email = shrey.pasricha@gmail.com
+
 [pull]
 	rebase = false
+
+[push]
+autoSetupRemote = true
+
 [core]
 	excludesfile = /home/cosmicdoge/.gitignore_global
 	autocrlf = input
@@ -22,6 +28,7 @@
 
 [diff]
     colorMoved = default
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
