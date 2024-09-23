@@ -12,7 +12,11 @@
     ~/:
       glob: true
       path: home/*
-      prefix: '.'
+      prefix: "."
+
+    ~/.local/:
+      glob: true
+      path: local/**
 
     ~/.config/:
       glob: true
