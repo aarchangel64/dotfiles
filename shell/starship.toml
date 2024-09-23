@@ -1,14 +1,28 @@
-# [](#9A348E)\
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# [](bg-1)\
+
+# Use zero width joiner \u200B to get a character we can apply styling to
+# this makes "prev_fg" work
+
+# use conditional matching to only show space if something is there
+# ([ ](bg:prev_bg fg:light)\
 
 format = """
-[ $username @ $hostname ](bg:#9A348E)\
-[](bg:#DA627D fg:#9A348E)\
+[ $username @ $hostname ](bg:bg-1)\
+[](bg:bg-2 fg:prev_bg)\
+[\u200B](bg:prev_bg fg:dark)\
 $directory\
-[](fg:#DA627D bg:#FCA17D)\
+[](fg:prev_bg bg:bg-3)\
+([ ](bg:prev_bg fg:dark)\
 $git_branch\
 $git_status\
-[](fg:#FCA17D bg:#86BBD8)\
-[$c\
+)\
+[](fg:prev_bg bg:bg-4)\
+([ ](bg:prev_bg fg:dark)\
+[\
+$c\
 $cmake\
 $daml\
 $deno\
@@ -42,51 +56,74 @@ $gcloud\
 $openstack\
 $azure\
 $crystal\
-$jobs](bg:#86BBD8)\
-[](fg:#86BBD8 bg:#06969A)\
+$jobs\
+](bg:prev_bg)\
+)\
+[](fg:prev_bg bg:bg-5)\
+([ ](bg:prev_bg fg:dark)\
+$package\
 $docker_context\
-[](fg:#06969A bg:#33658A)\
+)\
+[](fg:prev_bg bg:bg-6)\
+([ ](bg:prev_bg fg:light)\
 $env_var\
 $memory_usage\
 $custom\
 $sudo\
 $cmd_duration\
-[ ](fg:#33658A)\
+$status\
+)\
+[ ](fg:prev_bg)\
 $line_break\
-[▍](fg:#9A348E)\
+[▍](fg:bg-1)\
 """
-#[╚═❯ ](fg:#9A348E)\
-#[╚═❯ ](fg:#86BBD8)\
-#[┕━❯╰─\uea9c╚═❯](fg:#86BBD8)\
+#[╚═❯ ](fg:bg-1)\
+#[╚═❯ ](fg:bg-4)\
+#[┕━❯╰─\uea9c╚═❯](fg:bg-4)\
+
 
 add_newline = true
+
+palette = 'map'
+
+[palettes.map]
+light = "white"
+dark = "black"
+bg-1 = "#9A348E"
+bg-2 = "#DA627D"
+bg-3 = "#FCA17D"
+bg-4 = "#86BBD8"
+bg-5 = "#06969A"
+bg-6 = "#33658A"
+
 
 # You can also replace your username with a neat symbol like   or disable this
 # and use the os module below
 [username]
 show_always = true
-#style_user = "bg:#9A348E"
-#style_root = "bg:#9A348E"
+#style_user = "bg:bg-1"
+#style_root = "bg:bg-1"
 format = '$user'
 disabled = false
 
 # An alternative to the username module which displays a symbol that
 # represents the current operating system
 [os]
-style = "bg:#9A348E"
-disabled = true # Disabled by default
+style = "bg:prev"
+disabled = true   # Disabled by default
 
 [hostname]
 ssh_only = false
-style = "bold italic bg:#9A348E"
+style = "bold italic bg:prev_bg"
 format = "[$hostname]($style)"
 trim_at = ''
 disabled = false
 
 [directory]
-style = "bg:#DA627D"
+style = "bg:prev_bg fg:prev_fg"
 format = "[ $path ]($style)"
-truncation_length = 3
+fish_style_pwd_dir_length = 1
+truncation_length = 0
 truncation_symbol = "…/"
 
 # Here is how you can shorten some long paths by text replacement
@@ -102,61 +139,88 @@ truncation_symbol = "…/"
 # So either put "Important Documents" before "Documents" or use the substituted version:
 # "Important  " = "  "
 
+
+[package]
+display_private = true
+style = "bold bg:prev_bg fg:prev_fg"
+format = '[$symbol$version ]($style)'
+
+[cmd_duration]
+style = "bg:prev_bg fg:prev_fg"
+min_time = 500
+format = "[$duration ]($style)"
+
+[status]
+style = "bg:prev_bg fg:prev_fg"
+# style = "bold red bg:prev_bg"
+disabled = false
+
+
+[character]
+success_symbol = '[➜](bold green) '
+error_symbol = '[✗](bold red) '
+
+# Languages
+
 [c]
 symbol = ""
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+style = "bg:prev_bg fg:prev_fg"
+format = '[$symbol ($version) ]($style)'
 
 [docker_context]
 symbol = ""
-style = "bg:#06969A"
-format = '[ $symbol $context ]($style) $path'
+style = "bg:prev_bg fg:prev_fg"
+format = '[$symbol $context ]($style) $path'
 
 [elm]
 symbol = ""
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+style = "bg:prev_bg fg:prev_fg"
+format = '[$symbol ($version) ]($style)'
 
 [git_branch]
 symbol = ""
-style = "bg:#FCA17D"
-format = '[ $symbol $branch ]($style)'
+style = "bg:prev_bg fg:prev_fg"
+format = '[$symbol $branch ]($style)'
 
 [git_status]
-style = "bg:#FCA17D"
+style = "bg:prev_bg fg:prev_fg"
 format = '[$all_status$ahead_behind ]($style)'
 
 [golang]
 symbol = ""
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+style = "bg:prev_bg fg:prev_fg"
+format = '[$symbol ($version) ]($style)'
 
 [gradle]
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+style = "bg:prev_bg fg:prev_fg"
+format = '[$symbol ($version) ]($style)'
 
 [haskell]
 symbol = ""
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+style = "bg:prev_bg fg:prev_fg"
+format = '[$symbol ($version) ]($style)'
 
 [java]
 symbol = ""
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+style = "bg:prev_bg fg:prev_fg"
+format = '[$symbol ($version) ]($style)'
 
 [julia]
 symbol = ""
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+style = "bg:prev_bg fg:prev_fg"
+format = '[$symbol ($version) ]($style)'
 
 [nodejs]
 symbol = ""
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+style = "bg:prev_bg fg:prev_fg"
+format = '[$symbol ($version) ]($style)'
 
 [rust]
 symbol = ""
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+style = "bg:prev_bg fg:prev_fg"
+format = '[$symbol ($version) ]($style)'
 
+[python]
+symbol = " "
+style = "bg:prev_bg fg:prev_fg"
+format = '[$symbol ($version) ]($style)'
