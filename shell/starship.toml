@@ -10,7 +10,7 @@
 # ([ ](bg:prev_bg fg:light)\
 
 format = """
-[ $username @ $hostname ](bg:bg-1)\
+[ $username@$hostname ](bg:bg-1 fg:dark)\
 [](bg:bg-2 fg:prev_bg)\
 [\u200B](bg:prev_bg fg:dark)\
 $directory\
@@ -71,11 +71,12 @@ $memory_usage\
 $custom\
 $sudo\
 $cmd_duration\
+$character\
 $status\
 )\
 [ ](fg:prev_bg)\
 $line_break\
-[▍](fg:bg-1)\
+[](fg:bg-1)\
 """
 #[╚═❯ ](fg:bg-1)\
 #[╚═❯ ](fg:bg-4)\
@@ -114,7 +115,7 @@ disabled = true   # Disabled by default
 
 [hostname]
 ssh_only = false
-style = "bold italic bg:prev_bg"
+style = "bg:prev_bg fg:dark bold italic"
 format = "[$hostname]($style)"
 trim_at = ''
 disabled = false
@@ -150,15 +151,22 @@ style = "bg:prev_bg fg:prev_fg"
 min_time = 500
 format = "[$duration ]($style)"
 
+# https://starship.rs/config/#status
 [status]
 style = "bg:prev_bg fg:prev_fg"
 # style = "bold red bg:prev_bg"
+format = "[$symbol$status ]($style)"
 disabled = false
 
-
+# https://starship.rs/config/#character
 [character]
-success_symbol = '[➜](bold green) '
-error_symbol = '[✗](bold red) '
+success_symbol = ''
+error_symbol = ''
+vimcmd_symbol = "n "
+vimcmd_visual_symbol = "v "
+vimcmd_replace_one_symbol = "r "
+vimcmd_replace_symbol = "R "
+format = "[$symbol](bg:prev_bg fg:prev_fg italic)"
 
 # Languages
 
@@ -209,6 +217,12 @@ format = '[$symbol ($version) ]($style)'
 symbol = ""
 style = "bg:prev_bg fg:prev_fg"
 format = '[$symbol ($version) ]($style)'
+
+# Needs extra space
+[lua]
+symbol = ""
+style = "bg:prev_bg fg:prev_fg"
+format = '[$symbol  ($version) ]($style)'
 
 [nodejs]
 symbol = ""
