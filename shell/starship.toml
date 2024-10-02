@@ -168,6 +168,11 @@ vimcmd_replace_one_symbol = "r "
 vimcmd_replace_symbol = "R "
 format = "[$symbol](bg:prev_bg fg:prev_fg italic)"
 
+
+[jobs]
+style = "bg:prev_bg fg:prev_fg"
+format = "[$symbol( $number)]($style) "
+
 # Languages
 
 [c]
