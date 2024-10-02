@@ -73,7 +73,7 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec wezterm
 
 bindsym $mod+v exec vivaldi
 bindsym $mod+d exec dolphin

@@ -137,7 +137,7 @@ ForegroundVisited=155,89,182
 
 [General]
 ColorSchemeHash=38f350e0530aaa58cc20a2cf2011a8a2d0c7a4fc
-TerminalApplication=alacritty
+TerminalApplication=wezterm
 
 [KDE]
 ShowDeleteCommand=false

@@ -1484,8 +1484,6 @@ Purpose of question unknown.
 %
 Proposal: Unit 2B should eliminate the hostile machines.
 %
-Hostile machine lifeformｓ detected.
-%
 Enemy machines destroyed.
 %
 Requested material obtained.
@@ -1498,7 +1496,7 @@ Negative: Machine lifeforms do not possess such thought routines.
 %
 Alert: Hacking has resulted in an alignment of synaptic transmissions.
 %
-Alert: Abnormalities detected in vital signs.\nPulse rate nearing dangerous levels.
+Alert: Abnormalities detected in vital signs. Pulse rate nearing dangerous levels.
 %
 Proposal: Enemy should be dispatched immediately.
 %
@@ -1746,7 +1744,7 @@ Query: Since androids generate energy from water, what purpose does the Resistan
 %
 Proposal: Rogue YoRHa units should be captured and detained in order to keep collateral damage at a minimum.
 %
-Alert: Targets are rogue units 22B and 64B, currently designated for detention.\n\n(need to get "two two B" and "six four B" version)
+Alert: Targets are rogue units 22B and 64B, currently designated for detention.
 %
 Alert: Target is former YoRHa captain 8B, currently wanted for desertion.
 %
@@ -1787,8 +1785,6 @@ Hypothesis: Said material is likely a relic from an ancient civilization.
 Old world material obtained.
 %
 Hypothesis: Said material is likely a relic from an ancient civilization.
-%
-Hostile machine lifeforms defeated.
 %
 Analysis: Their garments were based on a subset of human culture.
 %
