@@ -15,6 +15,11 @@ return {
     },
   },
 
+  {
+    "nvim-telescope/telescope-file-browser.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+  },
+
   -- Prevent mason lsp conflicting with rustaceanvim
   {
     "neovim/nvim-lspconfig",

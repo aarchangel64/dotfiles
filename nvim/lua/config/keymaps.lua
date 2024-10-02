@@ -9,6 +9,16 @@ vim.keymap.del("n", "<C-Down>")
 vim.keymap.del("n", "<C-Left>")
 vim.keymap.del("n", "<C-Right>")
 
+-- Telescope file browser
+map("n", "<leader><space>", "<CMD>Telescope file_browser<CR>")
+
+map(
+  "n",
+  "<leader>.",
+  "<CMD>Telescope file_browser path=%:p:h select_buffer=true<CR>",
+  { desc = "Browse Current Directory" }
+)
+
 -- Add window resizing
 map({ "n", "x", "i" }, "<C-S-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
 map({ "n", "x", "i" }, "<C-S-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
