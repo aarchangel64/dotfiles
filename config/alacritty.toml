@@ -1,0 +1,11 @@
+[font]
+size = 15.0
+
+[font.normal]
+family = "Iosevka Term SS03"
+style = "Regular"
+
+[keyboard]
+bindings = [
+{ key = "N", mods = "Control|Shift", action = "CreateNewWindow" },
+]
