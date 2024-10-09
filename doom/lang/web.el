@@ -2,17 +2,31 @@
 
 ;; (setq-hook! 'web-mode-hook +format-with 'prettier-prettify)
 (add-hook! 'web-mode-hook #'lsp #'tree-sitter-hl-mode)
-(use-package! web-mode :mode (rx ".astro" string-end))
+;; (use-package! web-mode :mode (rx ".astro" string-end))
 
 ;; NOTE: astro-ls is exported as an npm dependency of astro, so you don't have to install it globally.
 
 (setq lsp-tailwindcss-add-on-mode t)
 
-(after!
- (web-mode tree-sitter)
- (when (string= (web-mode-detect-engine) "astro")
-   ;; (setf (alist-get 'web-mode tree-sitter-major-mode-language-alist) 'astro)
-   (tree-sitter-require 'astro)))
+;; (after!
+;;   (web-mode tree-sitter)
+;;   (when (string= (web-mode-detect-engine) "astro")
+;;     ;; (setf (alist-get 'web-mode tree-sitter-major-mode-language-alist) 'astro)
+;;     (tree-sitter-require 'astro)))
+
+
+(use-package! astro-ts-mode
+  :config
+  (global-treesit-auto-mode)
+  (let ((astro-recipe (make-treesit-auto-recipe
+                       :lang 'astro
+                       :ts-mode 'astro-ts-mode
+                       :url "https://github.com/virchau13/tree-sitter-astro"
+                       :revision "master"
+                       :source-dir "src")))
+    (add-to-list 'treesit-auto-recipe-list astro-recipe)
+    (add-to-list 'treesit-auto-langs 'astro)))
+
 
 (use-package! jsonc-mode :mode (rx (or ".json5" "tsconfig.json") string-end))
 

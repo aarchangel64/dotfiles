@@ -8,6 +8,9 @@
 ;; Use latest commit to get support for Astro
 (unpin! web-mode)
 (unpin! lsp-mode)
+(package! astro-ts-mode)
+
+(package! treesit-auto)
 
 (package! aggressive-indent)
 ;; (package! math-preview)

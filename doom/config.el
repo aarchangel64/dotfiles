@@ -87,6 +87,14 @@
   ;; Use tree-sitter syntax highlighting in all supported modes.
   (setq +tree-sitter-hl-enabled-modes t))
 
+;; https://github.com/renzmann/treesit-auto
+(use-package treesit-auto
+  :custom
+  (treesit-auto-install 'prompt)
+  :config
+  (treesit-auto-add-to-auto-mode-alist 'all)
+  (global-treesit-auto-mode))
+
 (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
 (global-tree-sitter-mode)
 
